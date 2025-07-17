@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import SportsGameOdds from 'sports-odds-api';
 
 const client = new SportsGameOdds({
-  apiKeyParam: process.env['SGOTEST_API_KEY_PARAM'], // This is the default and can be omitted
+  apiKeyParam: process.env['SPORTS_ODDS_API_KEY_HEADER'], // This is the default and can be omitted
 });
 
 const page = await client.events.getEvents();
@@ -44,7 +44,7 @@ This library includes TypeScript definitions for all request params and response
 import SportsGameOdds from 'sports-odds-api';
 
 const client = new SportsGameOdds({
-  apiKeyParam: process.env['SGOTEST_API_KEY_PARAM'], // This is the default and can be omitted
+  apiKeyParam: process.env['SPORTS_ODDS_API_KEY_HEADER'], // This is the default and can be omitted
 });
 
 const [event]: [SportsGameOdds.Event] = await client.events.getEvents();

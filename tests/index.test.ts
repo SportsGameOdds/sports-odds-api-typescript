@@ -453,14 +453,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['SGOTEST_API_KEY_HEADER'] = 'My API Key Header';
+    process.env['SPORTS_ODDS_API_KEY_HEADER'] = 'My API Key Header';
     const client = new SportsGameOdds();
     expect(client.apiKeyHeader).toBe('My API Key Header');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['SGOTEST_API_KEY_HEADER'] = 'another My API Key Header';
+    process.env['SPORTS_ODDS_API_KEY_HEADER'] = 'another My API Key Header';
     const client = new SportsGameOdds({ apiKeyHeader: 'My API Key Header' });
     expect(client.apiKeyHeader).toBe('My API Key Header');
   });

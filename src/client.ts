@@ -141,8 +141,8 @@ export class SportsGameOdds {
   /**
    * API Client for interfacing with the Sports Game Odds API.
    *
-   * @param {string | null | undefined} [opts.apiKeyHeader=process.env['SGOTEST_API_KEY_HEADER'] ?? null]
-   * @param {string | null | undefined} [opts.apiKeyParam=process.env['SGOTEST_API_KEY_PARAM'] ?? null]
+   * @param {string | null | undefined} [opts.apiKeyHeader=process.env['SPORTS_ODDS_API_KEY_HEADER'] ?? null]
+   * @param {string | null | undefined} [opts.apiKeyParam=process.env['SPORTS_ODDS_API_KEY_HEADER'] ?? null]
    * @param {string} [opts.baseURL=process.env['SPORTS_GAME_ODDS_BASE_URL'] ?? https://api.sportsgameodds.com/v2] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -153,8 +153,8 @@ export class SportsGameOdds {
    */
   constructor({
     baseURL = readEnv('SPORTS_GAME_ODDS_BASE_URL'),
-    apiKeyHeader = readEnv('SGOTEST_API_KEY_HEADER') ?? null,
-    apiKeyParam = readEnv('SGOTEST_API_KEY_PARAM') ?? null,
+    apiKeyHeader = readEnv('SPORTS_ODDS_API_KEY_HEADER') ?? null,
+    apiKeyParam = readEnv('SPORTS_ODDS_API_KEY_HEADER') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
