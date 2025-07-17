@@ -8,89 +8,87 @@ export class Sports extends APIResource {
   /**
    * Get a list of sports
    */
-  list(options?: RequestOptions): APIPromise<SportListResponse> {
-    return this._client.get('/sports/', options);
+  getSports(options?: RequestOptions): APIPromise<SportGetSportsResponse> {
+    return (
+      this._client.get('/sports/', options) as APIPromise<{ data: SportGetSportsResponse }>
+    )._thenUnwrap((obj) => obj.data);
   }
 }
 
-export interface SportListResponse {
-  data?: Array<SportListResponse.Data>;
+export interface Sport {
+  backgroundImage?: string;
+
+  basePeriods?: Array<string>;
+
+  clockType?: string;
+
+  defaultPopularityScore?: number;
+
+  enabled?: boolean;
+
+  eventWord?: Sport.EventWord;
+
+  extraPeriods?: Array<string>;
+
+  hasMeaningfulHomeAway?: boolean;
+
+  imageIcon?: string;
+
+  name?: string;
+
+  pointWord?: Sport.PointWord;
+
+  shortName?: string;
+
+  sportID?: string;
+
+  squareImage?: string;
 }
 
-export namespace SportListResponse {
-  export interface Data {
-    backgroundImage?: string;
+export namespace Sport {
+  export interface EventWord {
+    long?: EventWord.Long;
 
-    basePeriods?: Array<string>;
-
-    clockType?: string;
-
-    defaultPopularityScore?: number;
-
-    enabled?: boolean;
-
-    eventWord?: Data.EventWord;
-
-    extraPeriods?: Array<string>;
-
-    hasMeaningfulHomeAway?: boolean;
-
-    imageIcon?: string;
-
-    name?: string;
-
-    pointWord?: Data.PointWord;
-
-    shortName?: string;
-
-    sportID?: string;
-
-    squareImage?: string;
+    short?: EventWord.Short;
   }
 
-  export namespace Data {
-    export interface EventWord {
-      long?: EventWord.Long;
+  export namespace EventWord {
+    export interface Long {
+      plural?: string;
 
-      short?: EventWord.Short;
+      singular?: string;
     }
 
-    export namespace EventWord {
-      export interface Long {
-        plural?: string;
+    export interface Short {
+      plural?: string;
 
-        singular?: string;
-      }
+      singular?: string;
+    }
+  }
 
-      export interface Short {
-        plural?: string;
+  export interface PointWord {
+    long?: PointWord.Long;
 
-        singular?: string;
-      }
+    short?: PointWord.Short;
+  }
+
+  export namespace PointWord {
+    export interface Long {
+      plural?: string;
+
+      singular?: string;
     }
 
-    export interface PointWord {
-      long?: PointWord.Long;
+    export interface Short {
+      plural?: string;
 
-      short?: PointWord.Short;
-    }
-
-    export namespace PointWord {
-      export interface Long {
-        plural?: string;
-
-        singular?: string;
-      }
-
-      export interface Short {
-        plural?: string;
-
-        singular?: string;
-      }
+      singular?: string;
     }
   }
 }
+
+export type SportGetSportsResponse = Array<Sport>;
 
 export declare namespace Sports {
-  export { type SportListResponse as SportListResponse };
+  export { type Sport as Sport, type SportGetSportsResponse as SportGetSportsResponse };
 }

@@ -16,9 +16,9 @@ before making any information public.
 ## Reporting Non-SDK Related Security Issues
 
 If you encounter security issues that are not directly related to SDKs but pertain to the services
-or products provided by Sports Odds API, please follow the respective company's security reporting guidelines.
+or products provided by Sports Game Odds, please follow the respective company's security reporting guidelines.
 
-### Sports Odds API Terms and Policies
+### Sports Game Odds Terms and Policies
 
 Please contact api@sportsgameodds.com for any questions or concerns regarding the security of our services.
 
