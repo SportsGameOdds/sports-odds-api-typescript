@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { SportsOddsAPI as default } from './client';
+export { SportsGameOdds as default } from './client';
 
 export { type Uploadable, toFile } from './core/uploads';
 export { APIPromise } from './core/api-promise';
-export { SportsOddsAPI, type ClientOptions } from './client';
+export { SportsGameOdds, type ClientOptions } from './client';
+export { PagePromise } from './core/pagination';
 export {
-  SportsOddsAPIError,
+  SportsGameOddsError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,

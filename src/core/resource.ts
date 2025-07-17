@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { SportsOddsAPI } from '../client';
+import type { SportsGameOdds } from '../client';
 
 export abstract class APIResource {
-  protected _client: SportsOddsAPI;
+  protected _client: SportsGameOdds;
 
-  constructor(client: SportsOddsAPI) {
+  constructor(client: SportsGameOdds) {
     this._client = client;
   }
 }

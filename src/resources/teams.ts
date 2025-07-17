@@ -1,103 +1,84 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
+import { NextCursorPage, type NextCursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Teams extends APIResource {
   /**
    * Get a list of Teams by ID or league
    */
-  list(
-    query: TeamListParams | null | undefined = {},
+  getTeams(
+    query: TeamGetTeamsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<TeamListResponse> {
-    return this._client.get('/teams/', { query, ...options });
+  ): PagePromise<TeamsNextCursorPage, Team> {
+    return this._client.getAPIList('/teams/', NextCursorPage<Team>, { query, ...options });
   }
 }
 
-export interface TeamListResponse {
-  data?: Array<TeamListResponse.Data>;
+export type TeamsNextCursorPage = NextCursorPage<Team>;
 
-  nextCursor?: string;
+export interface Team {
+  colors?: Team.Colors;
 
-  success?: boolean;
+  leagueID?: string;
+
+  logo?: string;
+
+  lookups?: Team.Lookups;
+
+  names?: Team.Names;
+
+  sportID?: string;
+
+  standings?: Team.Standings;
+
+  teamID?: string;
 }
 
-export namespace TeamListResponse {
-  export interface Data {
-    colors?: Data.Colors;
+export namespace Team {
+  export interface Colors {
+    primary?: string;
 
-    leagueID?: string;
+    primaryContrast?: string;
 
-    logo?: string;
+    secondary?: string;
 
-    lookups?: Data.Lookups;
-
-    names?: Data.Names;
-
-    sportID?: string;
-
-    standings?: Data.Standings;
-
-    teamID?: string;
+    secondaryContrast?: string;
   }
 
-  export namespace Data {
-    export interface Colors {
-      primary?: string;
+  export interface Lookups {
+    teamName?: Array<string>;
+  }
 
-      primaryContrast?: string;
+  export interface Names {
+    long?: string;
 
-      secondary?: string;
+    medium?: string;
 
-      secondaryContrast?: string;
-    }
+    short?: string;
+  }
 
-    export interface Lookups {
-      teamName?: Array<string>;
-    }
+  export interface Standings {
+    losses?: number;
 
-    export interface Names {
-      long?: string;
+    played?: number;
 
-      medium?: string;
+    position?: string;
 
-      short?: string;
-    }
+    record?: string;
 
-    export interface Standings {
-      losses?: number;
+    ties?: number;
 
-      played?: number;
-
-      position?: string;
-
-      record?: string;
-
-      ties?: number;
-
-      wins?: number;
-    }
+    wins?: number;
   }
 }
 
-export interface TeamListParams {
-  /**
-   * The cursor for the request. Used to get the next group of Teams. This should be
-   * the nextCursor from the prior response.
-   */
-  cursor?: string;
-
+export interface TeamGetTeamsParams extends NextCursorPageParams {
   /**
    * A single leagueID or comma-separated list of leagueIDs to get Teams for
    */
   leagueID?: string;
-
-  /**
-   * The maximum number of Teams to return
-   */
-  limit?: number;
 
   /**
    * A single sportID or comma-separated list of sportIDs to get Teams for
@@ -111,5 +92,9 @@ export interface TeamListParams {
 }
 
 export declare namespace Teams {
-  export { type TeamListResponse as TeamListResponse, type TeamListParams as TeamListParams };
+  export {
+    type Team as Team,
+    type TeamsNextCursorPage as TeamsNextCursorPage,
+    type TeamGetTeamsParams as TeamGetTeamsParams,
+  };
 }

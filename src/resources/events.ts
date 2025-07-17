@@ -1,20 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
+import { NextCursorPage, type NextCursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Events extends APIResource {
   /**
    * Get a list of Events
    */
-  list(
-    query: EventListParams | null | undefined = {},
+  getEvents(
+    query: EventGetEventsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EventListResponse> {
-    return this._client.get('/events/', { query, ...options });
+  ): PagePromise<EventsNextCursorPage, Event> {
+    return this._client.getAPIList('/events/', NextCursorPage<Event>, { query, ...options });
   }
 }
+
+export type EventsNextCursorPage = NextCursorPage<Event>;
 
 export interface Event {
   activity?: Event.Activity;
@@ -256,15 +258,7 @@ export namespace Event {
   }
 }
 
-export interface EventListResponse {
-  data?: Array<Event>;
-
-  nextCursor?: string;
-
-  success?: boolean;
-}
-
-export interface EventListParams {
+export interface EventGetEventsParams extends NextCursorPageParams {
   /**
    * A bookmakerID or comma-separated list of bookmakerIDs to include odds for
    */
@@ -275,12 +269,6 @@ export interface EventListParams {
    * Events (omit)
    */
   cancelled?: boolean;
-
-  /**
-   * The cursor for the request. Used to get the next group of Events. This should be
-   * the nextCursor from the prior response.
-   */
-  cursor?: string;
 
   /**
    * Only include Events which have have ended (true), only Events which have not
@@ -313,11 +301,6 @@ export interface EventListParams {
    * A leagueID or comma-separated list of leagueIDs to get Events for
    */
   leagueID?: string;
-
-  /**
-   * The maximum number of Events to return
-   */
-  limit?: number;
 
   /**
    * Only include live Events (true), only non-live Events (false) or all Events
@@ -384,7 +367,7 @@ export interface EventListParams {
 export declare namespace Events {
   export {
     type Event as Event,
-    type EventListResponse as EventListResponse,
-    type EventListParams as EventListParams,
+    type EventsNextCursorPage as EventsNextCursorPage,
+    type EventGetEventsParams as EventGetEventsParams,
   };
 }

@@ -1,10 +1,10 @@
-# Sports Odds API TypeScript API Library
+# Sports Game Odds TypeScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/sports-odds-api.svg?label=npm%20(stable)>)](https://npmjs.org/package/sports-odds-api) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/sports-odds-api)
 
-This library provides convenient access to the Sports Odds API REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Sports Game Odds REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs/reference). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -23,13 +23,16 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 
-const client = new SportsOddsAPI();
+const client = new SportsGameOdds({
+  apiKeyParam: process.env['SGOTEST_API_KEY_PARAM'], // This is the default and can be omitted
+});
 
-const events = await client.events.list();
+const page = await client.events.getEvents();
+const event = page.data[0];
 
-console.log(events.data);
+console.log(event.activity);
 ```
 
 ### Request & Response types
@@ -38,11 +41,13 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 
-const client = new SportsOddsAPI();
+const client = new SportsGameOdds({
+  apiKeyParam: process.env['SGOTEST_API_KEY_PARAM'], // This is the default and can be omitted
+});
 
-const events: SportsOddsAPI.EventListResponse = await client.events.list();
+const [event]: [SportsGameOdds.Event] = await client.events.getEvents();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -55,8 +60,8 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const events = await client.events.list().catch(async (err) => {
-  if (err instanceof SportsOddsAPI.APIError) {
+const page = await client.events.getEvents().catch(async (err) => {
+  if (err instanceof SportsGameOdds.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
     console.log(err.headers); // {server: 'nginx', ...}
@@ -90,12 +95,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.events.list({
+await client.events.getEvents({
   maxRetries: 5,
 });
 ```
@@ -107,12 +112,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.events.list({
+await client.events.getEvents({
   timeout: 5 * 1000,
 });
 ```
@@ -120,6 +125,37 @@ await client.events.list({
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the SportsGameOdds API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllEvents(params) {
+  const allEvents = [];
+  // Automatically fetches more pages as needed.
+  for await (const event of client.events.getEvents({ limit: 30 })) {
+    allEvents.push(event);
+  }
+  return allEvents;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.events.getEvents({ limit: 30 });
+for (const event of page.data) {
+  console.log(event);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -133,15 +169,17 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new SportsOddsAPI();
+const client = new SportsGameOdds();
 
-const response = await client.events.list().asResponse();
+const response = await client.events.getEvents().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: events, response: raw } = await client.events.list().withResponse();
+const { data: page, response: raw } = await client.events.getEvents().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(events.data);
+for await (const event of page) {
+  console.log(event.activity);
+}
 ```
 
 ### Logging
@@ -154,13 +192,13 @@ console.log(events.data);
 
 The log level can be configured in two ways:
 
-1. Via the `SPORTS_ODDS_API_LOG` environment variable
+1. Via the `SPORTS_GAME_ODDS_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -186,13 +224,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new SportsOddsAPI({
-  logger: logger.child({ name: 'SportsOddsAPI' }),
+const client = new SportsGameOdds({
+  logger: logger.child({ name: 'SportsGameOdds' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -221,7 +259,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.events.list({
+client.events.getEvents({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
@@ -255,10 +293,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 import fetch from 'my-fetch';
 
-const client = new SportsOddsAPI({ fetch });
+const client = new SportsGameOdds({ fetch });
 ```
 
 ### Fetch options
@@ -266,9 +304,9 @@ const client = new SportsOddsAPI({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -283,11 +321,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -297,9 +335,9 @@ const client = new SportsOddsAPI({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import SportsOddsAPI from 'sports-odds-api';
+import SportsGameOdds from 'sports-odds-api';
 
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -309,10 +347,10 @@ const client = new SportsOddsAPI({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import SportsOddsAPI from 'npm:sports-odds-api';
+import SportsGameOdds from 'npm:sports-odds-api';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new SportsOddsAPI({
+const client = new SportsGameOdds({
   fetchOptions: {
     client: httpClient,
   },

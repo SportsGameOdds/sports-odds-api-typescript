@@ -1,91 +1,72 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
+import { NextCursorPage, type NextCursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Players extends APIResource {
   /**
    * Get a list of Players for a specific Team or Event
    */
-  list(
-    query: PlayerListParams | null | undefined = {},
+  getPlayers(
+    query: PlayerGetPlayersParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PlayerListResponse> {
-    return this._client.get('/players/', { query, ...options });
+  ): PagePromise<PlayersNextCursorPage, Player> {
+    return this._client.getAPIList('/players/', NextCursorPage<Player>, { query, ...options });
   }
 }
 
-export interface PlayerListResponse {
-  data?: Array<PlayerListResponse.Data>;
+export type PlayersNextCursorPage = NextCursorPage<Player>;
 
-  nextCursor?: string;
+export interface Player {
+  aliases?: Array<string>;
 
-  success?: boolean;
+  jerseyNumber?: number;
+
+  leagueID?: string;
+
+  lookups?: Player.Lookups;
+
+  names?: Player.Names;
+
+  playerID?: string;
+
+  playerTeams?: { [key: string]: Player.PlayerTeams };
+
+  position?: string;
+
+  sportID?: string;
+
+  teamID?: string;
 }
 
-export namespace PlayerListResponse {
-  export interface Data {
-    aliases?: Array<string>;
+export namespace Player {
+  export interface Lookups {
+    anyName?: Array<string>;
 
-    jerseyNumber?: number;
+    fullName?: Array<string>;
 
-    leagueID?: string;
+    initials?: Array<string>;
+  }
 
-    lookups?: Data.Lookups;
+  export interface Names {
+    display?: string;
 
-    names?: Data.Names;
+    firstName?: string;
 
-    playerID?: string;
+    lastName?: string;
+  }
 
-    playerTeams?: { [key: string]: Data.PlayerTeams };
-
-    position?: string;
-
-    sportID?: string;
-
+  export interface PlayerTeams {
     teamID?: string;
   }
-
-  export namespace Data {
-    export interface Lookups {
-      anyName?: Array<string>;
-
-      fullName?: Array<string>;
-
-      initials?: Array<string>;
-    }
-
-    export interface Names {
-      display?: string;
-
-      firstName?: string;
-
-      lastName?: string;
-    }
-
-    export interface PlayerTeams {
-      teamID?: string;
-    }
-  }
 }
 
-export interface PlayerListParams {
-  /**
-   * The cursor for the request. Used to get the next group of Players. This should
-   * be the nextCursor from the prior response.
-   */
-  cursor?: string;
-
+export interface PlayerGetPlayersParams extends NextCursorPageParams {
   /**
    * EventID to get Players data for
    */
   eventID?: string;
-
-  /**
-   * The maximum number of Players to return
-   */
-  limit?: number;
 
   /**
    * PlayerID to get data for
@@ -99,5 +80,9 @@ export interface PlayerListParams {
 }
 
 export declare namespace Players {
-  export { type PlayerListResponse as PlayerListResponse, type PlayerListParams as PlayerListParams };
+  export {
+    type Player as Player,
+    type PlayersNextCursorPage as PlayersNextCursorPage,
+    type PlayerGetPlayersParams as PlayerGetPlayersParams,
+  };
 }

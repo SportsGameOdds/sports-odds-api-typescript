@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { SportsOddsAPI } from 'sports-odds-api';
+import { SportsGameOdds } from 'sports-odds-api';
 
-const { stringifyQuery } = SportsOddsAPI.prototype as any;
+const { stringifyQuery } = SportsGameOdds.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

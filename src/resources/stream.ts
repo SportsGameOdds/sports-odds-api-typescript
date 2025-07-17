@@ -9,29 +9,29 @@ export class Stream extends APIResource {
   /**
    * Setup streamed (WebSocket) connection
    */
-  getEvents(
-    query: StreamGetEventsParams | null | undefined = {},
+  events(
+    query: StreamEventsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<StreamGetEventsResponse> {
+  ): APIPromise<StreamEventsResponse> {
     return this._client.get('/stream/events', { query, ...options });
   }
 }
 
-export interface StreamGetEventsResponse {
+export interface StreamEventsResponse {
   channel?: string;
 
   data?: Array<EventsAPI.Event>;
 
   pusherKey?: string;
 
-  pusherOptions?: StreamGetEventsResponse.PusherOptions;
+  pusherOptions?: StreamEventsResponse.PusherOptions;
 
   success?: boolean;
 
   user?: string;
 }
 
-export namespace StreamGetEventsResponse {
+export namespace StreamEventsResponse {
   export interface PusherOptions {
     channelAuthorization?: PusherOptions.ChannelAuthorization;
 
@@ -59,7 +59,7 @@ export namespace StreamGetEventsResponse {
   }
 }
 
-export interface StreamGetEventsParams {
+export interface StreamEventsParams {
   /**
    * An eventID to stream events for
    */
@@ -77,8 +77,5 @@ export interface StreamGetEventsParams {
 }
 
 export declare namespace Stream {
-  export {
-    type StreamGetEventsResponse as StreamGetEventsResponse,
-    type StreamGetEventsParams as StreamGetEventsParams,
-  };
+  export { type StreamEventsResponse as StreamEventsResponse, type StreamEventsParams as StreamEventsParams };
 }

@@ -13,17 +13,19 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type NextCursorPageParams, NextCursorPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Account, AccountGetUsageResponse, RateLimitInterval } from './resources/account';
-import { Event, EventListParams, EventListResponse, Events } from './resources/events';
-import { LeagueListParams, LeagueListResponse, Leagues } from './resources/leagues';
-import { PlayerListParams, PlayerListResponse, Players } from './resources/players';
-import { SportListResponse, Sports } from './resources/sports';
-import { StatListParams, StatListResponse, Stats } from './resources/stats';
-import { Stream, StreamGetEventsParams, StreamGetEventsResponse } from './resources/stream';
-import { TeamListParams, TeamListResponse, Teams } from './resources/teams';
+import { Account, AccountUsage, RateLimitInterval } from './resources/account';
+import { Event, EventGetEventsParams, Events, EventsNextCursorPage } from './resources/events';
+import { League, LeagueGetLeaguesParams, LeagueGetLeaguesResponse, Leagues } from './resources/leagues';
+import { Player, PlayerGetPlayersParams, Players, PlayersNextCursorPage } from './resources/players';
+import { Sport, SportGetSportsResponse, Sports } from './resources/sports';
+import { Stat, StatGetStatsParams, StatGetStatsResponse, Stats } from './resources/stats';
+import { Stream, StreamEventsParams, StreamEventsResponse } from './resources/stream';
+import { Team, TeamGetTeamsParams, Teams, TeamsNextCursorPage } from './resources/teams';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -39,14 +41,19 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Your API key
+   * API key via header
    */
-  apiKey?: string | undefined;
+  apiKeyHeader?: string | null | undefined;
+
+  /**
+   * API key via query param
+   */
+  apiKeyParam?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['SPORTS_ODDS_API_BASE_URL'].
+   * Defaults to process.env['SPORTS_GAME_ODDS_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -100,7 +107,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['SPORTS_ODDS_API_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['SPORTS_GAME_ODDS_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -113,10 +120,11 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Sports Odds API API.
+ * API Client for interfacing with the Sports Game Odds API.
  */
-export class SportsOddsAPI {
-  apiKey: string;
+export class SportsGameOdds {
+  apiKeyHeader: string | null;
+  apiKeyParam: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -131,10 +139,11 @@ export class SportsOddsAPI {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Sports Odds API API.
+   * API Client for interfacing with the Sports Game Odds API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['SPORTS_ODDS_API_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['SPORTS_ODDS_API_BASE_URL'] ?? https://api.sportsgameodds.com/v2] - Override the default base URL for the API.
+   * @param {string | null | undefined} [opts.apiKeyHeader=process.env['SGOTEST_API_KEY_HEADER'] ?? null]
+   * @param {string | null | undefined} [opts.apiKeyParam=process.env['SGOTEST_API_KEY_PARAM'] ?? null]
+   * @param {string} [opts.baseURL=process.env['SPORTS_GAME_ODDS_BASE_URL'] ?? https://api.sportsgameodds.com/v2] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -143,31 +152,27 @@ export class SportsOddsAPI {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('SPORTS_ODDS_API_BASE_URL'),
-    apiKey = readEnv('SPORTS_ODDS_API_API_KEY'),
+    baseURL = readEnv('SPORTS_GAME_ODDS_BASE_URL'),
+    apiKeyHeader = readEnv('SGOTEST_API_KEY_HEADER') ?? null,
+    apiKeyParam = readEnv('SGOTEST_API_KEY_PARAM') ?? null,
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.SportsOddsAPIError(
-        "The SPORTS_ODDS_API_API_KEY environment variable is missing or empty; either provide it, or instantiate the SportsOddsAPI client with an apiKey option, like new SportsOddsAPI({ apiKey: 'My API Key' }).",
-      );
-    }
-
     const options: ClientOptions = {
-      apiKey,
+      apiKeyHeader,
+      apiKeyParam,
       ...opts,
       baseURL: baseURL || `https://api.sportsgameodds.com/v2`,
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? SportsOddsAPI.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? SportsGameOdds.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('SPORTS_ODDS_API_LOG'), "process.env['SPORTS_ODDS_API_LOG']", this) ??
+      parseLogLevel(readEnv('SPORTS_GAME_ODDS_LOG'), "process.env['SPORTS_GAME_ODDS_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -176,7 +181,8 @@ export class SportsOddsAPI {
 
     this._options = options;
 
-    this.apiKey = apiKey;
+    this.apiKeyHeader = apiKeyHeader;
+    this.apiKeyParam = apiKeyParam;
   }
 
   /**
@@ -192,7 +198,8 @@ export class SportsOddsAPI {
       logLevel: this.logLevel,
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
-      apiKey: this.apiKey,
+      apiKeyHeader: this.apiKeyHeader,
+      apiKeyParam: this.apiKeyParam,
       ...options,
     });
     return client;
@@ -206,7 +213,10 @@ export class SportsOddsAPI {
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
-    return this._options.defaultQuery;
+    return {
+      apiKey: this.apiKeyParam ?? undefined,
+      ...this._options.defaultQuery,
+    };
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
@@ -214,7 +224,10 @@ export class SportsOddsAPI {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ 'x-api-key': this.apiKey }]);
+    if (this.apiKeyHeader == null) {
+      return undefined;
+    }
+    return buildHeaders([{ 'x-api-key': this.apiKeyHeader }]);
   }
 
   /**
@@ -230,7 +243,7 @@ export class SportsOddsAPI {
         if (value === null) {
           return `${encodeURIComponent(key)}=`;
         }
-        throw new Errors.SportsOddsAPIError(
+        throw new Errors.SportsGameOddsError(
           `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
         );
       })
@@ -489,6 +502,25 @@ export class SportsOddsAPI {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as SportsGameOdds, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -702,10 +734,10 @@ export class SportsOddsAPI {
     }
   }
 
-  static SportsOddsAPI = this;
+  static SportsGameOdds = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static SportsOddsAPIError = Errors.SportsOddsAPIError;
+  static SportsGameOddsError = Errors.SportsGameOddsError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -730,51 +762,69 @@ export class SportsOddsAPI {
   account: API.Account = new API.Account(this);
   stream: API.Stream = new API.Stream(this);
 }
-SportsOddsAPI.Events = Events;
-SportsOddsAPI.Teams = Teams;
-SportsOddsAPI.Players = Players;
-SportsOddsAPI.Leagues = Leagues;
-SportsOddsAPI.Sports = Sports;
-SportsOddsAPI.Stats = Stats;
-SportsOddsAPI.Account = Account;
-SportsOddsAPI.Stream = Stream;
-export declare namespace SportsOddsAPI {
+SportsGameOdds.Events = Events;
+SportsGameOdds.Teams = Teams;
+SportsGameOdds.Players = Players;
+SportsGameOdds.Leagues = Leagues;
+SportsGameOdds.Sports = Sports;
+SportsGameOdds.Stats = Stats;
+SportsGameOdds.Account = Account;
+SportsGameOdds.Stream = Stream;
+export declare namespace SportsGameOdds {
   export type RequestOptions = Opts.RequestOptions;
+
+  export import NextCursorPage = Pagination.NextCursorPage;
+  export {
+    type NextCursorPageParams as NextCursorPageParams,
+    type NextCursorPageResponse as NextCursorPageResponse,
+  };
 
   export {
     Events as Events,
     type Event as Event,
-    type EventListResponse as EventListResponse,
-    type EventListParams as EventListParams,
+    type EventsNextCursorPage as EventsNextCursorPage,
+    type EventGetEventsParams as EventGetEventsParams,
   };
 
-  export { Teams as Teams, type TeamListResponse as TeamListResponse, type TeamListParams as TeamListParams };
+  export {
+    Teams as Teams,
+    type Team as Team,
+    type TeamsNextCursorPage as TeamsNextCursorPage,
+    type TeamGetTeamsParams as TeamGetTeamsParams,
+  };
 
   export {
     Players as Players,
-    type PlayerListResponse as PlayerListResponse,
-    type PlayerListParams as PlayerListParams,
+    type Player as Player,
+    type PlayersNextCursorPage as PlayersNextCursorPage,
+    type PlayerGetPlayersParams as PlayerGetPlayersParams,
   };
 
   export {
     Leagues as Leagues,
-    type LeagueListResponse as LeagueListResponse,
-    type LeagueListParams as LeagueListParams,
+    type League as League,
+    type LeagueGetLeaguesResponse as LeagueGetLeaguesResponse,
+    type LeagueGetLeaguesParams as LeagueGetLeaguesParams,
   };
 
-  export { Sports as Sports, type SportListResponse as SportListResponse };
+  export { Sports as Sports, type Sport as Sport, type SportGetSportsResponse as SportGetSportsResponse };
 
-  export { Stats as Stats, type StatListResponse as StatListResponse, type StatListParams as StatListParams };
+  export {
+    Stats as Stats,
+    type Stat as Stat,
+    type StatGetStatsResponse as StatGetStatsResponse,
+    type StatGetStatsParams as StatGetStatsParams,
+  };
 
   export {
     Account as Account,
+    type AccountUsage as AccountUsage,
     type RateLimitInterval as RateLimitInterval,
-    type AccountGetUsageResponse as AccountGetUsageResponse,
   };
 
   export {
     Stream as Stream,
-    type StreamGetEventsResponse as StreamGetEventsResponse,
-    type StreamGetEventsParams as StreamGetEventsParams,
+    type StreamEventsResponse as StreamEventsResponse,
+    type StreamEventsParams as StreamEventsParams,
   };
 }

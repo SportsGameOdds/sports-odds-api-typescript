@@ -8,33 +8,31 @@ export class Leagues extends APIResource {
   /**
    * Get a list of Leagues
    */
-  list(
-    query: LeagueListParams | null | undefined = {},
+  getLeagues(
+    query: LeagueGetLeaguesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<LeagueListResponse> {
-    return this._client.get('/leagues/', { query, ...options });
+  ): APIPromise<LeagueGetLeaguesResponse> {
+    return (
+      this._client.get('/leagues/', { query, ...options }) as APIPromise<{ data: LeagueGetLeaguesResponse }>
+    )._thenUnwrap((obj) => obj.data);
   }
 }
 
-export interface LeagueListResponse {
-  data?: Array<LeagueListResponse.Data>;
+export interface League {
+  enabled?: boolean;
+
+  leagueID?: string;
+
+  name?: string;
+
+  shortName?: string;
+
+  sportID?: string;
 }
 
-export namespace LeagueListResponse {
-  export interface Data {
-    enabled?: boolean;
+export type LeagueGetLeaguesResponse = Array<League>;
 
-    leagueID?: string;
-
-    name?: string;
-
-    shortName?: string;
-
-    sportID?: string;
-  }
-}
-
-export interface LeagueListParams {
+export interface LeagueGetLeaguesParams {
   /**
    * The league to get data for
    */
@@ -47,5 +45,9 @@ export interface LeagueListParams {
 }
 
 export declare namespace Leagues {
-  export { type LeagueListResponse as LeagueListResponse, type LeagueListParams as LeagueListParams };
+  export {
+    type League as League,
+    type LeagueGetLeaguesResponse as LeagueGetLeaguesResponse,
+    type LeagueGetLeaguesParams as LeagueGetLeaguesParams,
+  };
 }
