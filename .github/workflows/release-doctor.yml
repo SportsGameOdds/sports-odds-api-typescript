@@ -18,4 +18,3 @@ jobs:
         run: |
           bash ./bin/check-release-environment
         env:
-          NPM_TOKEN: ${{ secrets.SPORTS_GAME_ODDS_NPM_TOKEN || secrets.NPM_TOKEN }}
