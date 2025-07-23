@@ -21,3 +21,5 @@ export {
   PermissionDeniedError,
   UnprocessableEntityError,
 } from './core/error';
+
+export { Helpers } from './lib/index';
