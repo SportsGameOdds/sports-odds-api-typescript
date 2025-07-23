@@ -1,7 +1,5 @@
-export function getEventID(event: { id: string }) {
-  return event.id;
-}
+import { Event } from '../resources/events';
 
-export function formatEventName(name: string) {
-  return name.toUpperCase();
+export function getEventID(event: Event) {
+  return event.eventID;
 }
