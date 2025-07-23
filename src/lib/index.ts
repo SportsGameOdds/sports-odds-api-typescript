@@ -1,4 +1,4 @@
-import * as events from "./events";
+import * as events from './events';
 
 export const Helpers = {
   events,
