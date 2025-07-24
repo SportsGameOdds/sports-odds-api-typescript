@@ -35,6 +35,85 @@ const event = page.data[0];
 console.log(event.activity);
 ```
 
+# Real-Time Event Streaming API
+
+This API endpoint is only available to **AllStar** and **custom plan** subscribers. It is not included with basic subscription tiers. [Contact support](mailto:api@sportsgameodds.com) to get access.
+
+This streaming API is currently in **beta**. API call patterns, response formats, and functionality may change. Fully managed streaming via SDK may be available in future releases.
+
+Our Streaming API provides real-time updates for Event objects through WebSocket connections. Instead of polling our REST endpoints, you can maintain a persistent connection to receive instant notifications when events change. This is ideal for applications that need immediate updates with minimal delay.
+
+We use [Pusher Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/) for WebSocket communication. While you can connect using any WebSocket library, we strongly recommend using any [Pusher Client Library](https://pusher.com/docs/channels/library_auth_reference/pusher-client-libraries) (ex: [Javascript](https://github.com/pusher/pusher-js), [Python](https://github.com/pusher/pusher-http-python))
+
+
+## How It Works
+
+The streaming process involves two steps:
+
+1. **Get Connection Details**: Make a request to `/v2/stream/events` to receive:
+    - WebSocket authentication credentials
+    - WebSocket URL/channel info
+    - Initial snapshot of current data
+
+2. **Connect and Stream**: Use the provided details to connect via Pusher (or another WebSocket library) and receive real-time `eventID` notifications for changed events
+
+Your API key will have limits on concurrent streams.
+
+## Available Feeds
+
+Subscribe to different feeds using the `feed` query parameter:
+
+| Feed              | Description                                                                 | Required Parameters |
+| ----------------- | --------------------------------------------------------------------------- | ------------------- |
+| `events:live`     | All events currently in progress (started but not finished)                | None                |
+| `events:upcoming` | Upcoming events with available odds for a specific league                  | `leagueID`          |
+| `events:byid`     | Updates for a single specific event                                         | `eventID`           |
+
+The number of supported feeds will increase over time. Please reach out if you have a use case which can't be covered by these feeds.
+
+## Quick Start Example
+
+Here's the minimal code to connect to live events:
+
+```js [JavaScript/Node.js]
+const axios = require("axios");
+const Pusher = require("pusher-js");
+const SportsGameOdds = require("sports-odds-api");
+
+
+const STREAM_FEED = "events:live"; // ex: events:upcoming, events:byid, events:live
+const API_KEY = "YOUR API KEY";
+const client = new SportsGameOdds({ apiKeyHeader: API_KEY });
+
+const run = async () => {
+  // Initialize a data structure where we'll save the event data
+  const EVENTS = new Map();
+
+  // Call this endpoint to get initial data and connection parameters
+  const streamInfo = await client.stream.events({ feed: STREAM_FEED })
+
+  // Seed initial data
+  streamInfo.data.forEach((event) => EVENTS.set(event?.eventID, event));
+
+  // Connect to WebSocket server
+  const pusher = new Pusher(streamInfo.pusherKey, streamInfo.pusherOptions);
+  pusher.subscribe(streamInfo.channel).bind("data", async (changedEvents) => {
+    // Get the eventIDs that changed
+    const eventIDs = changedEvents.map(({ eventID }) => eventID).join(",");
+
+    // Get the full event data for the changed events
+     for await (const event of client.events.getEvents({ eventIDs })) {
+        // Update our data with the full event data
+        EVENTS.set(event?.eventID, event);
+     }
+  });
+
+  // Use pusher.disconnect to disconnect from the WebSocket server
+  process.on("SIGINT", pusher.disconnect);
+};
+run();
+```
+
 ### Request & Response types
 
 This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
