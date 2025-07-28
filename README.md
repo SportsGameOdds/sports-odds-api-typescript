@@ -47,7 +47,7 @@ We use [Pusher Protocol](https://pusher.com/docs/channels/library_auth_reference
 
 The streaming process involves two steps:
 
-1. **Get Connection Details**: Make a request to `/v2/stream/events` to receive:
+1. **Get Connection Details**: Make a request using `client.stream.events()` to receive:
     - WebSocket authentication credentials
     - WebSocket URL/channel info
     - Initial snapshot of current data
