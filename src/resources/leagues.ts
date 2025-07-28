@@ -8,12 +8,12 @@ export class Leagues extends APIResource {
   /**
    * Get a list of Leagues
    */
-  getLeagues(
-    query: LeagueGetLeaguesParams | null | undefined = {},
+  get(
+    query: LeagueGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<LeagueGetLeaguesResponse> {
+  ): APIPromise<LeagueGetResponse> {
     return (
-      this._client.get('/leagues/', { query, ...options }) as APIPromise<{ data: LeagueGetLeaguesResponse }>
+      this._client.get('/leagues/', { query, ...options }) as APIPromise<{ data: LeagueGetResponse }>
     )._thenUnwrap((obj) => obj.data);
   }
 }
@@ -30,9 +30,9 @@ export interface League {
   sportID?: string;
 }
 
-export type LeagueGetLeaguesResponse = Array<League>;
+export type LeagueGetResponse = Array<League>;
 
-export interface LeagueGetLeaguesParams {
+export interface LeagueGetParams {
   /**
    * The league to get data for
    */
@@ -47,7 +47,7 @@ export interface LeagueGetLeaguesParams {
 export declare namespace Leagues {
   export {
     type League as League,
-    type LeagueGetLeaguesResponse as LeagueGetLeaguesResponse,
-    type LeagueGetLeaguesParams as LeagueGetLeaguesParams,
+    type LeagueGetResponse as LeagueGetResponse,
+    type LeagueGetParams as LeagueGetParams,
   };
 }

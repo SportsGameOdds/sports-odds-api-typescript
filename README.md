@@ -29,7 +29,7 @@ const client = new SportsGameOdds({
   apiKeyParam: process.env['SPORTS_ODDS_API_KEY_HEADER'], // This is the default and can be omitted
 });
 
-const page = await client.events.getEvents();
+const page = await client.events.get();
 const event = page.data[0];
 
 console.log(event.activity);
@@ -126,7 +126,7 @@ const client = new SportsGameOdds({
   apiKeyParam: process.env['SPORTS_ODDS_API_KEY_HEADER'], // This is the default and can be omitted
 });
 
-const [event]: [SportsGameOdds.Event] = await client.events.getEvents();
+const [event]: [SportsGameOdds.Event] = await client.events.get();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -139,7 +139,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const page = await client.events.getEvents().catch(async (err) => {
+const page = await client.events.get().catch(async (err) => {
   if (err instanceof SportsGameOdds.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -179,7 +179,7 @@ const client = new SportsGameOdds({
 });
 
 // Or, configure per-request:
-await client.events.getEvents({
+await client.events.get({
   maxRetries: 5,
 });
 ```
@@ -196,7 +196,7 @@ const client = new SportsGameOdds({
 });
 
 // Override per-request:
-await client.events.getEvents({
+await client.events.get({
   timeout: 5 * 1000,
 });
 ```
@@ -214,7 +214,7 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllEvents(params) {
   const allEvents = [];
   // Automatically fetches more pages as needed.
-  for await (const event of client.events.getEvents({ limit: 30 })) {
+  for await (const event of client.events.get({ limit: 30 })) {
     allEvents.push(event);
   }
   return allEvents;
@@ -224,7 +224,7 @@ async function fetchAllEvents(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.events.getEvents({ limit: 30 });
+let page = await client.events.get({ limit: 30 });
 for (const event of page.data) {
   console.log(event);
 }
@@ -250,11 +250,11 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new SportsGameOdds();
 
-const response = await client.events.getEvents().asResponse();
+const response = await client.events.get().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: page, response: raw } = await client.events.getEvents().withResponse();
+const { data: page, response: raw } = await client.events.get().withResponse();
 console.log(raw.headers.get('X-My-Header'));
 for await (const event of page) {
   console.log(event.activity);
@@ -338,7 +338,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.events.getEvents({
+client.events.get({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

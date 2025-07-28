@@ -8,8 +8,8 @@ export class Teams extends APIResource {
   /**
    * Get a list of Teams by ID or league
    */
-  getTeams(
-    query: TeamGetTeamsParams | null | undefined = {},
+  get(
+    query: TeamGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TeamsNextCursorPage, Team> {
     return this._client.getAPIList('/teams/', NextCursorPage<Team>, { query, ...options });
@@ -74,7 +74,7 @@ export namespace Team {
   }
 }
 
-export interface TeamGetTeamsParams extends NextCursorPageParams {
+export interface TeamGetParams extends NextCursorPageParams {
   /**
    * A single leagueID or comma-separated list of leagueIDs to get Teams for
    */
@@ -95,6 +95,6 @@ export declare namespace Teams {
   export {
     type Team as Team,
     type TeamsNextCursorPage as TeamsNextCursorPage,
-    type TeamGetTeamsParams as TeamGetTeamsParams,
+    type TeamGetParams as TeamGetParams,
   };
 }

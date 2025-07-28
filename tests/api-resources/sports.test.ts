@@ -9,8 +9,8 @@ const client = new SportsGameOdds({
 
 describe('resource sports', () => {
   // skipped: tests are disabled for the time being
-  test.skip('getSports', async () => {
-    const responsePromise = client.sports.getSports();
+  test.skip('get', async () => {
+    const responsePromise = client.sports.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

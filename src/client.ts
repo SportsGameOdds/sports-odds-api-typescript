@@ -19,13 +19,13 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Account, AccountUsage, RateLimitInterval } from './resources/account';
-import { Event, EventGetEventsParams, Events, EventsNextCursorPage } from './resources/events';
-import { League, LeagueGetLeaguesParams, LeagueGetLeaguesResponse, Leagues } from './resources/leagues';
-import { Player, PlayerGetPlayersParams, Players, PlayersNextCursorPage } from './resources/players';
-import { Sport, SportGetSportsResponse, Sports } from './resources/sports';
-import { Stat, StatGetStatsParams, StatGetStatsResponse, Stats } from './resources/stats';
+import { Event, EventGetParams, Events, EventsNextCursorPage } from './resources/events';
+import { League, LeagueGetParams, LeagueGetResponse, Leagues } from './resources/leagues';
+import { Player, PlayerGetParams, Players, PlayersNextCursorPage } from './resources/players';
+import { Sport, SportGetResponse, Sports } from './resources/sports';
+import { Stat, StatGetParams, StatGetResponse, Stats } from './resources/stats';
 import { Stream, StreamEventsParams, StreamEventsResponse } from './resources/stream';
-import { Team, TeamGetTeamsParams, Teams, TeamsNextCursorPage } from './resources/teams';
+import { Team, TeamGetParams, Teams, TeamsNextCursorPage } from './resources/teams';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -783,37 +783,37 @@ export declare namespace SportsGameOdds {
     Events as Events,
     type Event as Event,
     type EventsNextCursorPage as EventsNextCursorPage,
-    type EventGetEventsParams as EventGetEventsParams,
+    type EventGetParams as EventGetParams,
   };
 
   export {
     Teams as Teams,
     type Team as Team,
     type TeamsNextCursorPage as TeamsNextCursorPage,
-    type TeamGetTeamsParams as TeamGetTeamsParams,
+    type TeamGetParams as TeamGetParams,
   };
 
   export {
     Players as Players,
     type Player as Player,
     type PlayersNextCursorPage as PlayersNextCursorPage,
-    type PlayerGetPlayersParams as PlayerGetPlayersParams,
+    type PlayerGetParams as PlayerGetParams,
   };
 
   export {
     Leagues as Leagues,
     type League as League,
-    type LeagueGetLeaguesResponse as LeagueGetLeaguesResponse,
-    type LeagueGetLeaguesParams as LeagueGetLeaguesParams,
+    type LeagueGetResponse as LeagueGetResponse,
+    type LeagueGetParams as LeagueGetParams,
   };
 
-  export { Sports as Sports, type Sport as Sport, type SportGetSportsResponse as SportGetSportsResponse };
+  export { Sports as Sports, type Sport as Sport, type SportGetResponse as SportGetResponse };
 
   export {
     Stats as Stats,
     type Stat as Stat,
-    type StatGetStatsResponse as StatGetStatsResponse,
-    type StatGetStatsParams as StatGetStatsParams,
+    type StatGetResponse as StatGetResponse,
+    type StatGetParams as StatGetParams,
   };
 
   export {
