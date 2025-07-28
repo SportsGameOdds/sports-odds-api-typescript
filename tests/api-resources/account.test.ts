@@ -8,8 +8,7 @@ const client = new SportsGameOdds({
 });
 
 describe('resource account', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('getUsage', async () => {
+  test('getUsage', async () => {
     const responsePromise = client.account.getUsage();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
