@@ -8,10 +8,10 @@ export class Sports extends APIResource {
   /**
    * Get a list of sports
    */
-  getSports(options?: RequestOptions): APIPromise<SportGetSportsResponse> {
-    return (
-      this._client.get('/sports/', options) as APIPromise<{ data: SportGetSportsResponse }>
-    )._thenUnwrap((obj) => obj.data);
+  get(options?: RequestOptions): APIPromise<SportGetResponse> {
+    return (this._client.get('/sports/', options) as APIPromise<{ data: SportGetResponse }>)._thenUnwrap(
+      (obj) => obj.data,
+    );
   }
 }
 
@@ -87,8 +87,8 @@ export namespace Sport {
   }
 }
 
-export type SportGetSportsResponse = Array<Sport>;
+export type SportGetResponse = Array<Sport>;
 
 export declare namespace Sports {
-  export { type Sport as Sport, type SportGetSportsResponse as SportGetSportsResponse };
+  export { type Sport as Sport, type SportGetResponse as SportGetResponse };
 }

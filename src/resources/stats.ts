@@ -8,12 +8,9 @@ export class Stats extends APIResource {
   /**
    * Get a list of StatIDs
    */
-  getStats(
-    query: StatGetStatsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<StatGetStatsResponse> {
+  get(query: StatGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<StatGetResponse> {
     return (
-      this._client.get('/stats/', { query, ...options }) as APIPromise<{ data: StatGetStatsResponse }>
+      this._client.get('/stats/', { query, ...options }) as APIPromise<{ data: StatGetResponse }>
     )._thenUnwrap((obj) => obj.data);
   }
 }
@@ -70,9 +67,9 @@ export namespace Stat {
   }
 }
 
-export type StatGetStatsResponse = Array<Stat>;
+export type StatGetResponse = Array<Stat>;
 
-export interface StatGetStatsParams {
+export interface StatGetParams {
   /**
    * SportID to get StatIDs for
    */
@@ -92,9 +89,5 @@ export interface StatGetStatsParams {
 }
 
 export declare namespace Stats {
-  export {
-    type Stat as Stat,
-    type StatGetStatsResponse as StatGetStatsResponse,
-    type StatGetStatsParams as StatGetStatsParams,
-  };
+  export { type Stat as Stat, type StatGetResponse as StatGetResponse, type StatGetParams as StatGetParams };
 }

@@ -6,7 +6,7 @@ Types:
 
 Methods:
 
-- <code title="get /events/">client.events.<a href="./src/resources/events.ts">getEvents</a>({ ...params }) -> EventsNextCursorPage</code>
+- <code title="get /events/">client.events.<a href="./src/resources/events.ts">get</a>({ ...params }) -> EventsNextCursorPage</code>
 
 # Teams
 
@@ -16,7 +16,7 @@ Types:
 
 Methods:
 
-- <code title="get /teams/">client.teams.<a href="./src/resources/teams.ts">getTeams</a>({ ...params }) -> TeamsNextCursorPage</code>
+- <code title="get /teams/">client.teams.<a href="./src/resources/teams.ts">get</a>({ ...params }) -> TeamsNextCursorPage</code>
 
 # Players
 
@@ -26,40 +26,40 @@ Types:
 
 Methods:
 
-- <code title="get /players/">client.players.<a href="./src/resources/players.ts">getPlayers</a>({ ...params }) -> PlayersNextCursorPage</code>
+- <code title="get /players/">client.players.<a href="./src/resources/players.ts">get</a>({ ...params }) -> PlayersNextCursorPage</code>
 
 # Leagues
 
 Types:
 
 - <code><a href="./src/resources/leagues.ts">League</a></code>
-- <code><a href="./src/resources/leagues.ts">LeagueGetLeaguesResponse</a></code>
+- <code><a href="./src/resources/leagues.ts">LeagueGetResponse</a></code>
 
 Methods:
 
-- <code title="get /leagues/">client.leagues.<a href="./src/resources/leagues.ts">getLeagues</a>({ ...params }) -> LeagueGetLeaguesResponse</code>
+- <code title="get /leagues/">client.leagues.<a href="./src/resources/leagues.ts">get</a>({ ...params }) -> LeagueGetResponse</code>
 
 # Sports
 
 Types:
 
 - <code><a href="./src/resources/sports.ts">Sport</a></code>
-- <code><a href="./src/resources/sports.ts">SportGetSportsResponse</a></code>
+- <code><a href="./src/resources/sports.ts">SportGetResponse</a></code>
 
 Methods:
 
-- <code title="get /sports/">client.sports.<a href="./src/resources/sports.ts">getSports</a>() -> SportGetSportsResponse</code>
+- <code title="get /sports/">client.sports.<a href="./src/resources/sports.ts">get</a>() -> SportGetResponse</code>
 
 # Stats
 
 Types:
 
 - <code><a href="./src/resources/stats.ts">Stat</a></code>
-- <code><a href="./src/resources/stats.ts">StatGetStatsResponse</a></code>
+- <code><a href="./src/resources/stats.ts">StatGetResponse</a></code>
 
 Methods:
 
-- <code title="get /stats/">client.stats.<a href="./src/resources/stats.ts">getStats</a>({ ...params }) -> StatGetStatsResponse</code>
+- <code title="get /stats/">client.stats.<a href="./src/resources/stats.ts">get</a>({ ...params }) -> StatGetResponse</code>
 
 # Account
 

@@ -9,8 +9,8 @@ const client = new SportsGameOdds({
 
 describe('resource leagues', () => {
   // skipped: tests are disabled for the time being
-  test.skip('getLeagues', async () => {
-    const responsePromise = client.leagues.getLeagues();
+  test.skip('get', async () => {
+    const responsePromise = client.leagues.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,13 +21,10 @@ describe('resource leagues', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getLeagues: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.leagues.getLeagues(
-        { leagueID: 'leagueID', sportID: 'sportID' },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.leagues.get({ leagueID: 'leagueID', sportID: 'sportID' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(SportsGameOdds.NotFoundError);
   });
 });

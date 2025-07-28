@@ -8,8 +8,8 @@ export class Players extends APIResource {
   /**
    * Get a list of Players for a specific Team or Event
    */
-  getPlayers(
-    query: PlayerGetPlayersParams | null | undefined = {},
+  get(
+    query: PlayerGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PlayersNextCursorPage, Player> {
     return this._client.getAPIList('/players/', NextCursorPage<Player>, { query, ...options });
@@ -62,7 +62,7 @@ export namespace Player {
   }
 }
 
-export interface PlayerGetPlayersParams extends NextCursorPageParams {
+export interface PlayerGetParams extends NextCursorPageParams {
   /**
    * EventID to get Players data for
    */
@@ -83,6 +83,6 @@ export declare namespace Players {
   export {
     type Player as Player,
     type PlayersNextCursorPage as PlayersNextCursorPage,
-    type PlayerGetPlayersParams as PlayerGetPlayersParams,
+    type PlayerGetParams as PlayerGetParams,
   };
 }

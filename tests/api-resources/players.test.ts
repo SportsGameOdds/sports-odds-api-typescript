@@ -9,8 +9,8 @@ const client = new SportsGameOdds({
 
 describe('resource players', () => {
   // skipped: tests are disabled for the time being
-  test.skip('getPlayers', async () => {
-    const responsePromise = client.players.getPlayers();
+  test.skip('get', async () => {
+    const responsePromise = client.players.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,10 +21,10 @@ describe('resource players', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getPlayers: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.players.getPlayers(
+      client.players.get(
         { cursor: 'cursor', eventID: 'eventID', limit: 0, playerID: 'playerID', teamID: 'teamID' },
         { path: '/_stainless_unknown_path' },
       ),

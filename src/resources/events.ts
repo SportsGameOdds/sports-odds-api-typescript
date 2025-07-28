@@ -8,8 +8,8 @@ export class Events extends APIResource {
   /**
    * Get a list of Events
    */
-  getEvents(
-    query: EventGetEventsParams | null | undefined = {},
+  get(
+    query: EventGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EventsNextCursorPage, Event> {
     return this._client.getAPIList('/events/', NextCursorPage<Event>, { query, ...options });
@@ -258,7 +258,7 @@ export namespace Event {
   }
 }
 
-export interface EventGetEventsParams extends NextCursorPageParams {
+export interface EventGetParams extends NextCursorPageParams {
   /**
    * A bookmakerID or comma-separated list of bookmakerIDs to include odds for
    */
@@ -368,6 +368,6 @@ export declare namespace Events {
   export {
     type Event as Event,
     type EventsNextCursorPage as EventsNextCursorPage,
-    type EventGetEventsParams as EventGetEventsParams,
+    type EventGetParams as EventGetParams,
   };
 }
