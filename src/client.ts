@@ -762,6 +762,7 @@ export class SportsGameOdds {
   account: API.Account = new API.Account(this);
   stream: API.Stream = new API.Stream(this);
 }
+
 SportsGameOdds.Events = Events;
 SportsGameOdds.Teams = Teams;
 SportsGameOdds.Players = Players;
@@ -770,6 +771,7 @@ SportsGameOdds.Sports = Sports;
 SportsGameOdds.Stats = Stats;
 SportsGameOdds.Account = Account;
 SportsGameOdds.Stream = Stream;
+
 export declare namespace SportsGameOdds {
   export type RequestOptions = Opts.RequestOptions;
 
