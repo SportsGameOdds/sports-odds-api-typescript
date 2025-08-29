@@ -1,4 +1,4 @@
-# Sports Game Odds TypeScript API Library
+# Sports Odds API - Live Sports Data & Sportsbook Betting Odds - Powered by SportsGameOdds API Library
 
 Get live betting odds, spreads, and totals for NFL, NBA, MLB, and 50 additional sports and leagues. Production-ready TypeScript/JavaScript SDK with WebSocket support, 99.9% uptime, and sub-minute updates during live games. Perfect for developers building sportsbook platforms, odds comparison tools, positive EV models, and anything else that requires fast, accurate sports data.
 
@@ -6,7 +6,7 @@ Get live betting odds, spreads, and totals for NFL, NBA, MLB, and 50 additional 
 
 This library provides convenient access to the Sports Game Odds REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs/reference). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs). The full API of this library can be found in [api.md](api.md).
 
 ## Features
 
