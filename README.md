@@ -1,10 +1,10 @@
-# Sports Game Odds TypeScript API Library
+# Sports Odds API - Live Sports Data & Sportsbook Betting Odds - Powered by SportsGameOdds API Library
 
 [![NPM version](<https://img.shields.io/npm/v/sports-odds-api.svg?label=npm%20(stable)>)](https://npmjs.org/package/sports-odds-api) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/sports-odds-api)
 
 This library provides convenient access to the Sports Game Odds REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs/reference). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
