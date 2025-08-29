@@ -65,5 +65,7 @@
       "import": "./dist/*.mjs",
       "require": "./dist/*.js"
     }
-  }
+  },
+  "keywords": ["odds api", "sports api", "betting api", "odds", "api", "sports", "betting", "data", "sportsbook", "bookmaker", "live", "player", "props", "prop", "comparison", "line", "arbitrage", "futures", "parlay", "moneyline", "spread", "totals", "deeplinks", "scores", "stats", "real-time", "sdk", "typescript", "rest", "react", "native", "nfl", "nba", "mlb", "nhl", "ncaa", "soccer", "football", "tennis", "mma", "golf", "draftkings", "fanduel", "dfs", "fantasy", "discord", "bot", "analytics", "wagering", "bet"],
+  "homepage": "https://sportsgameodds.com"
 }
