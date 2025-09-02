@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0 (2025-09-02)
+
+Full Changelog: [v0.1.0-alpha.3...v1.0.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v0.1.0-alpha.3...v1.0.0)
+
+### Features
+
+* **api:** update via SDK Studio ([e4d7cec](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e4d7cece238c1907c09bc69b0c37648e8c7c411a))
+
 ## 0.1.0-alpha.3 (2025-08-29)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
