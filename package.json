@@ -1,6 +1,6 @@
 {
   "name": "sports-odds-api",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "description": "The official TypeScript library for the Sports Game Odds API",
   "author": "Sports Game Odds <api@sportsgameodds.com>",
   "types": "dist/index.d.ts",
@@ -13,6 +13,9 @@
     "**/*"
   ],
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "./scripts/test",
     "build": "./scripts/build",
@@ -41,14 +44,11 @@
     "publint": "^0.2.12",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.5.0",
-    "tsc-multi": "https://github.com/stainless-api/tsc-multi/releases/download/v1.1.8/tsc-multi.tgz",
+    "tsc-multi": "https://github.com/stainless-api/tsc-multi/releases/download/v1.1.9/tsc-multi.tgz",
     "tsconfig-paths": "^4.0.0",
+    "tslib": "^2.8.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.1"
-  },
-  "imports": {
-    "sports-odds-api": ".",
-    "sports-odds-api/*": "./src/*"
   },
   "exports": {
     ".": {
@@ -65,5 +65,7 @@
       "import": "./dist/*.mjs",
       "require": "./dist/*.js"
     }
-  }
+  },
+  "keywords": ["odds api", "sports api", "betting api", "odds", "api", "sports", "betting", "data", "sportsbook", "bookmaker", "live", "player", "props", "prop", "comparison", "line", "arbitrage", "futures", "parlay", "moneyline", "spread", "totals", "deeplinks", "scores", "stats", "real-time", "sdk", "typescript", "rest", "react", "native", "nfl", "nba", "mlb", "nhl", "ncaa", "soccer", "football", "tennis", "mma", "golf", "draftkings", "fanduel", "dfs", "fantasy", "discord", "bot", "analytics", "wagering", "bet"],
+  "homepage": "https://sportsgameodds.com"
 }

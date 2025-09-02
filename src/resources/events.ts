@@ -33,6 +33,9 @@ export interface Event {
 
   players?: { [key: string]: Event.Players };
 
+  /**
+   * Nested results in the format `<periodID>.<statEntityID>.<statID> → number`.
+   */
   results?: { [key: string]: { [key: string]: { [key: string]: number } } };
 
   sportID?: string;

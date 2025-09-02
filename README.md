@@ -1,21 +1,37 @@
-# Sports Game Odds TypeScript API Library
+# Sports Odds API - Live Sports Data & Sportsbook Betting Odds - Powered by SportsGameOdds API Library
+
+Get live betting odds, spreads, and totals for NFL, NBA, MLB, and 50 additional sports and leagues. Production-ready TypeScript/JavaScript SDK with WebSocket support, 99.9% uptime, and sub-minute updates during live games. Perfect for developers building sportsbook platforms, odds comparison tools, positive EV models, and anything else that requires fast, accurate sports data.
 
 [![NPM version](<https://img.shields.io/npm/v/sports-odds-api.svg?label=npm%20(stable)>)](https://npmjs.org/package/sports-odds-api) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/sports-odds-api)
 
 This library provides convenient access to the Sports Game Odds REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs/reference). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [sportsgameodds.com](https://sportsgameodds.com/docs). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainless.com/).
+## Features
+
+**For developers building the next generation of sports stats and/or betting applications:**
+
+- 📈 **3k+ odds markets** including moneylines, spreads, over/unders, team props, player props & more
+- 🏈 **50+ leagues covered** including NFL, NBA, MLB, NHL, NCAAF, NCAAB, EPL, UCL, UFC, PGA, ATP & more
+- 📊 **80+ sportsbooks** with unified odds formats, alt lines & deeplinks
+- 📺 **Live scores & stats** coverage on all games, teams, and players
+- ⚡ **Sub-100ms response times** and sub-minute updates for fast data
+- 🔧 **Full TypeScript support** with comprehensive type definitions
+- 💰 **Developer-friendly pricing** with a generous free tier
+- ⏱️ **5-minute setup** with copy-paste examples
 
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:SportsGameOdds/sports-odds-api-typescript.git
+npm install sports-odds-api
 ```
 
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install sports-odds-api`
+## Obtain an API Key
+
+Get a free API key from [sportsgameodds.com](https://sportsgameodds.com/pricing).
+
+Unlike enterprise-only solutions, the Sports Game Odds API offers a developer-friendly experience, transparent pricing, comprehensive documentation, and a generous free tier.
 
 ## Usage
 
@@ -26,7 +42,7 @@ The full API of this library can be found in [api.md](api.md).
 import SportsGameOdds from 'sports-odds-api';
 
 const client = new SportsGameOdds({
-  apiKeyParam: process.env['SPORTS_ODDS_API_KEY_HEADER'], // This is the default and can be omitted
+  apiKeyParam: process.env['YOUR_API_KEY'], // This is the default and can be omitted
 });
 
 const page = await client.events.get();
@@ -50,7 +66,7 @@ We use [Pusher Protocol](https://pusher.com/docs/channels/library_auth_reference
 
 The streaming process involves two steps:
 
-1. **Get Connection Details**: Make a request to `/v2/stream/events` to receive:
+1. **Get Connection Details**: Make a request using `client.stream.events()` to receive:
     - WebSocket authentication credentials
     - WebSocket URL/channel info
     - Initial snapshot of current data
@@ -207,7 +223,7 @@ Note that requests which time out will be [retried twice by default](#retries).
 
 ## Auto-pagination
 
-List methods in the SportsGameOdds API are paginated.
+Requests for Events, Teams, and Players are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
@@ -436,20 +452,6 @@ const client = new SportsGameOdds({
 });
 ```
 
-## Frequently Asked Questions
-
-## Semantic versioning
-
-This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
-
-1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
-3. Changes that we do not expect to impact the vast majority of users in practice.
-
-We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
-
-We are keen for your feedback; please open an [issue](https://www.github.com/SportsGameOdds/sports-odds-api-typescript/issues) with questions, bugs, or suggestions.
-
 ## Requirements
 
 TypeScript >= 4.9 is supported.
@@ -464,11 +466,3 @@ The following runtimes are supported:
 - Vercel Edge Runtime.
 - Jest 28 or greater with the `"node"` environment (`"jsdom"` is not supported at this time).
 - Nitro v2.6 or greater.
-
-Note that React Native is not supported at this time.
-
-If you are interested in other runtime environments, please open or upvote an issue on GitHub.
-
-## Contributing
-
-See [the contributing documentation](./CONTRIBUTING.md).
