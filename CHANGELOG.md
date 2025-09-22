@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1 (2025-09-22)
+
+Full Changelog: [v1.0.0...v1.0.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.0.0...v1.0.1)
+
+### Chores
+
+* ci build action ([bee14ae](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/bee14aec091663ac30255a221e3cd0523bb66a12))
+* do not install brew dependencies in ./scripts/bootstrap by default ([fbe7a8d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/fbe7a8db54b0e2a30164d928a639cba46e5638d6))
+* **internal:** codegen related update ([de904cd](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/de904cdeca27aae2787c869fc774aa12e5a5fbc3))
+
 ## 1.0.0 (2025-09-02)
 
 Full Changelog: [v0.1.0-alpha.3...v1.0.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v0.1.0-alpha.3...v1.0.0)
