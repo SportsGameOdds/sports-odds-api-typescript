@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "sports-odds-api/*": ["dist/src/*"],
-      "sports-odds-api": ["dist/src/index.ts"]
+      "sports-odds-api/*": ["./dist/src/*"],
+      "sports-odds-api": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

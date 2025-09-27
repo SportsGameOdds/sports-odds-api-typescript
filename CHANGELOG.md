@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.2 (2025-09-27)
+
+Full Changelog: [v1.0.1...v1.0.2](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.0.1...v1.0.2)
+
+### Chores
+
+* **internal:** codegen related update ([b8a3243](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/b8a324381f2b495d457f1b4406880b0270e6df87))
+* **internal:** codegen related update ([e5b97b3](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e5b97b3f99e49ce1b825b34afa6d90c49216b5f8))
+* **internal:** fix incremental formatting in some cases ([4f18b2d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/4f18b2d4c197e2b7484aebe0f3111e97409d85da))
+* **internal:** ignore .eslintcache ([1673a7d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/1673a7d5692e2841cf2d243b2521afb95af48eb8))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([cddfbfe](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/cddfbfe14e590727a8cac1499fb42480f333109c))
+
 ## 1.0.1 (2025-09-22)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.0.0...v1.0.1)
