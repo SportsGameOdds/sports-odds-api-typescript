@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.1.0 (2025-10-01)
+
+Full Changelog: [v1.0.1...v1.1.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.0.1...v1.1.0)
+
+### Features
+
+* **api:** manual updates ([e7007f1](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e7007f1fccd7ffba0bab76afda8a9fafb4ed1aa0))
+
+
+### Bug Fixes
+
+* **mcp:** fix cli argument parsing logic ([0411622](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0411622e2371d536e9bfb2554ef49581e60a34a2))
+* **mcp:** resolve a linting issue in server code ([2d94636](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/2d94636fcf03820f279dea7600017d9c2221e02a))
+
+
+### Chores
+
+* configure new SDK language ([4fa3275](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/4fa327585a56e29b08dfa22ba304e73af435cec2))
+* **internal:** codegen related update ([b8a3243](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/b8a324381f2b495d457f1b4406880b0270e6df87))
+* **internal:** codegen related update ([e5b97b3](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e5b97b3f99e49ce1b825b34afa6d90c49216b5f8))
+* **internal:** fix incremental formatting in some cases ([4f18b2d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/4f18b2d4c197e2b7484aebe0f3111e97409d85da))
+* **internal:** ignore .eslintcache ([1673a7d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/1673a7d5692e2841cf2d243b2521afb95af48eb8))
+* **internal:** remove .eslintcache ([490bb2d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/490bb2d74b99a43d171c6adbbce39c0cab257cf6))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([cddfbfe](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/cddfbfe14e590727a8cac1499fb42480f333109c))
+* update lockfile ([fd37159](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/fd37159bce245938903dfd6b62a2403216cb2200))
+
 ## 1.0.1 (2025-09-22)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.0.0...v1.0.1)
