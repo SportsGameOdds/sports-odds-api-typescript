@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 (2025-10-04)
+
+Full Changelog: [v1.1.0...v1.1.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.1.0...v1.1.1)
+
+### Chores
+
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([d61de9b](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/d61de9b4d6dc2048183e47a7ee6c7535fc106c77))
+
 ## 1.1.0 (2025-10-01)
 
 Full Changelog: [v1.0.1...v1.1.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.0.1...v1.1.0)
