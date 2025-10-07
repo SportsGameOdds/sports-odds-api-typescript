@@ -4,13 +4,14 @@
 // Note: Streaming requires an AllStar plan subscription
 
 import SportsGameOdds from 'sports-odds-api';
+// @ts-ignore
 import Pusher from 'pusher-js';
 
-const API_KEY = process.env.SPORTS_ODDS_API_KEY_HEADER;
+const API_KEY = process.env['SPORTS_ODDS_API_KEY_HEADER'];
 
 if (!API_KEY) {
   console.error('Error: SPORTS_ODDS_API_KEY_HEADER environment variable not set');
-  console.error('Usage: export SPORTS_ODDS_API_KEY_HEADER=\'your-api-key-here\'');
+  console.error("Usage: export SPORTS_ODDS_API_KEY_HEADER='your-api-key-here'");
   process.exit(1);
 }
 
@@ -41,6 +42,8 @@ async function main() {
     // Seed initial data
     if (streamInfo.data) {
       for (const event of streamInfo.data) {
+        if (!event.eventID) continue;
+
         events.set(event.eventID, event);
       }
     }
@@ -60,18 +63,20 @@ async function main() {
       console.log(`\n[${timestamp}] Received update for ${changedEvents.length} event(s)`);
 
       // Get the eventIDs that changed
-      const eventIDs = changedEvents.map((e) => e.eventID).join(',');
+      const eventIDs = changedEvents.map((e) => e.eventID || '').join(',');
 
       // Get the full event data for the changed events
       const updatedEvents = await client.events.get({ eventIDs });
 
       for (const event of updatedEvents.data) {
+        if (!event.eventID) continue;
+
         // Update our data with the full event data
         events.set(event.eventID, event);
 
         console.log(`  Updated: ${event.eventID}`);
-        if (event.awayTeamName && event.homeTeamName) {
-          console.log(`    ${event.awayTeamName} @ ${event.homeTeamName}`);
+        if (event.teams?.away?.names?.long && event.teams?.home?.names?.long) {
+          console.log(`    ${event.teams?.away?.names?.long} @ ${event.teams?.home?.names?.long}`);
         }
         if (event.activity) {
           console.log(`    Activity: ${event.activity}`);

@@ -4,11 +4,11 @@
 
 import SportsGameOdds from 'sports-odds-api';
 
-const API_KEY = process.env.SPORTS_ODDS_API_KEY_HEADER;
+const API_KEY = process.env['SPORTS_ODDS_API_KEY_HEADER'];
 
 if (!API_KEY) {
   console.error('Error: SPORTS_ODDS_API_KEY_HEADER environment variable not set');
-  console.error('Usage: export SPORTS_ODDS_API_KEY_HEADER=\'your-api-key-here\'');
+  console.error("Usage: export SPORTS_ODDS_API_KEY_HEADER='your-api-key-here'");
   process.exit(1);
 }
 
@@ -47,10 +47,12 @@ async function main() {
 
     for (const event of page.data) {
       const eventID = event.eventID;
+      if (!eventID) continue;
+
       oddsMap.set(eventID, new Map());
 
       console.log(`Event: ${eventID}`);
-      console.log(`  ${event.awayTeamName} @ ${event.homeTeamName}`);
+      console.log(`  ${event.teams?.home?.names?.long} @ ${event.teams?.away?.names?.long}`);
 
       // Check if odds exist
       if (!event.odds) {
@@ -61,7 +63,7 @@ async function main() {
       // Group odds by betTypeID
       // IMPORTANT: event.odds is an object keyed by oddID, not an array!
       for (const [oddId, odd] of Object.entries(event.odds)) {
-        const betTypeID = odd.betTypeID;
+        const betTypeID = odd.betTypeID || '';
 
         if (!oddsMap.get(eventID)!.has(betTypeID)) {
           oddsMap.get(eventID)!.set(betTypeID, []);
@@ -103,7 +105,7 @@ async function main() {
 
     // Show example of accessing the odds map
     if (oddsMap.size > 0) {
-      const firstEventID = Array.from(oddsMap.keys())[0];
+      const firstEventID = Array.from(oddsMap.keys())[0] || '';
       console.log(`\nExample - Accessing odds for event ${firstEventID}:`);
 
       const firstEventOdds = oddsMap.get(firstEventID)!;
@@ -111,7 +113,9 @@ async function main() {
         console.log(`  betTypeID ${betTypeID}: ${markets.length} markets`);
         if (markets.length > 0) {
           const firstMarket = markets[0];
-          console.log(`    Sample market: bookmakerID=${firstMarket.bookmakerID}, price=${firstMarket.price}`);
+          console.log(
+            `    Sample market: bookmakerID=${firstMarket.bookmakerID}, price=${firstMarket.price}`,
+          );
         }
       }
     }

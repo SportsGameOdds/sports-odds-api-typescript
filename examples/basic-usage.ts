@@ -4,11 +4,11 @@
 
 import SportsGameOdds from 'sports-odds-api';
 
-const API_KEY = process.env.SPORTS_ODDS_API_KEY_HEADER;
+const API_KEY = process.env['SPORTS_ODDS_API_KEY_HEADER'];
 
 if (!API_KEY) {
   console.error('Error: SPORTS_ODDS_API_KEY_HEADER environment variable not set');
-  console.error('Usage: export SPORTS_ODDS_API_KEY_HEADER=\'your-api-key-here\'');
+  console.error("Usage: export SPORTS_ODDS_API_KEY_HEADER='your-api-key-here'");
   process.exit(1);
 }
 
@@ -55,7 +55,7 @@ async function main() {
     // Example 3: Error handling
     console.log('\n=== Error Handling Example ===');
     try {
-      await client.events.get({ eventIDs: 'invalid-id' });
+      await client.events.get({ eventID: 'invalid-id' });
     } catch (err: unknown) {
       if (err instanceof SportsGameOdds.APIError) {
         console.log(`Caught ${err.name}: ${err.message}`);
