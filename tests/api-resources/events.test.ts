@@ -29,6 +29,7 @@ describe('resource events', () => {
           cursor: 'cursor',
           ended: true,
           eventID: 'eventID',
+          eventIDs: 'eventIDs',
           finalized: true,
           includeAltLines: true,
           includeOpposingOdds: true,
