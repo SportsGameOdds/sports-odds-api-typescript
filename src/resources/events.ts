@@ -33,9 +33,6 @@ export interface Event {
 
   players?: { [key: string]: Event.Players };
 
-  /**
-   * Nested results in the format `<periodID>.<statEntityID>.<statID> → number`.
-   */
   results?: { [key: string]: { [key: string]: { [key: string]: number } } };
 
   sportID?: string;
@@ -280,9 +277,14 @@ export interface EventGetParams extends NextCursorPageParams {
   ended?: boolean;
 
   /**
-   * An eventID or comma-separated list of eventIDs to get Event data for
+   * An eventID to get Event data for
    */
   eventID?: string;
+
+  /**
+   * A comma separated list of eventIDs to get Event data for
+   */
+  eventIDs?: string;
 
   /**
    * Only include finalized Events (true), exclude unfinalized Events (false) or all
