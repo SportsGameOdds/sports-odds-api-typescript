@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1 (2025-10-25)
+
+Full Changelog: [v1.2.0...v1.2.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.0...v1.2.1)
+
+### Chores
+
+* configure new SDK language ([fde9011](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/fde901169fb87020ca07d708ee1cd7d9fe7f35a5))
+
 ## 1.2.0 (2025-10-08)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.1.0...v1.2.0)
