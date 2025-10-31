@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.2 (2025-10-31)
+
+Full Changelog: [v1.2.1...v1.2.2](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.1...v1.2.2)
+
+### Bug Fixes
+
+* **mcpb:** pin @anthropic-ai/mcpb version ([0f780bf](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0f780bf4024412253595c611b86487e3d4d2245e))
+
 ## 1.2.1 (2025-10-25)
 
 Full Changelog: [v1.2.0...v1.2.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.0...v1.2.1)
