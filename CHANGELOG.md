@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.3.0 (2025-11-11)
+
+Full Changelog: [v1.2.1...v1.3.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.1...v1.3.0)
+
+### Features
+
+* **mcp:** enable optional code execution tool on http mcp servers ([23addbc](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/23addbc8d3855bce7a931de6f5ba77b0d2cbd89c))
+
+
+### Bug Fixes
+
+* **mcpb:** pin @anthropic-ai/mcpb version ([0f780bf](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0f780bf4024412253595c611b86487e3d4d2245e))
+
+
+### Chores
+
+* **internal:** codegen related update ([47b4441](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/47b4441e3e12136dfd35bc97ca4f4dd22c3e711f))
+* **internal:** codegen related update ([24d1299](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/24d129980c982092e6c63d1fe77e76e340fa6139))
+* **internal:** grammar fix (it's -&gt; its) ([9f2d744](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/9f2d7442062323259d970218cb9d2a6ee5a8e0bc))
+* mcp code tool explicit error message when missing a run function ([a882d25](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/a882d252a719e2cf2f5773f267e727760b041dc7))
+* **mcp:** add friendlier MCP code tool errors on incorrect method invocations ([3c30509](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/3c3050993937a9e95e735537b5cbd68d19d249eb))
+* **mcp:** add line numbers to code tool errors ([7479b9c](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/7479b9c0143b66bb15355cc2c89d4d77ddd8715f))
+* **mcp:** clarify http auth error ([6213956](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/6213956ae86335f8764eb69e167add67127d73a1))
+* use structured error when code execution tool errors ([2c1dcb5](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/2c1dcb51c6ded41e88cbe1ab21e749288da2ba58))
+
+
+### Documentation
+
+* **mcp:** add a README button for one-click add to Cursor ([759c62f](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/759c62f4bf4e749f51d53c610a837100592a9f4c))
+* **mcp:** add a README link to add server to VS Code or Claude Code ([e56ab60](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e56ab609431d0ef15e21a2d196fbfa16fcc6d3a8))
+
 ## 1.2.1 (2025-10-25)
 
 Full Changelog: [v1.2.0...v1.2.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.0...v1.2.1)
