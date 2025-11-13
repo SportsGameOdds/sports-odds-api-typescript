@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'sports-odds-api-mcp/filtering';
-import { Metadata, asTextContentResult } from 'sports-odds-api-mcp/tools/types';
+import { isJqError, maybeFilter } from 'sports-odds-api-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'sports-odds-api-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import SportsGameOdds from 'sports-odds-api';
@@ -50,7 +50,14 @@ export const tool: Tool = {
 
 export const handler = async (client: SportsGameOdds, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.stream.events(body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.stream.events(body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };
