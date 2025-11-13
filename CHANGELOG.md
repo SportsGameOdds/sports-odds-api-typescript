@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.3.1 (2025-11-13)
+
+Full Changelog: [v1.3.0...v1.3.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.3.0...v1.3.1)
+
+### Bug Fixes
+
+* **mcp:** return tool execution error on jq failure ([1be0c9d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/1be0c9d901bfce91807773150c3c130290a74724))
+
+
+### Chores
+
+* **mcp:** upgrade jq-web ([3e47dbf](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/3e47dbfaae4fd02cee1c707ebbc231a17152f3b0))
+
 ## 1.3.0 (2025-11-11)
 
 Full Changelog: [v1.2.1...v1.3.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.1...v1.3.0)
