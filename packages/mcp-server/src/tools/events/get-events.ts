@@ -140,7 +140,7 @@ export const handler = async (client: SportsGameOdds, args: Record<string, unkno
   try {
     return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof SportsGameOdds.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;
