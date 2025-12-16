@@ -34,7 +34,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'sports_odds_api_api',
-      version: '1.3.0',
+      version: '1.4.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
