@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.4.0 (2025-12-11)
+
+Full Changelog: [v1.3.0...v1.4.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.3.0...v1.4.0)
+
+### Features
+
+* **mcp:** add detail field to docs search tool ([e08aa2e](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e08aa2e5a31bab61066a816ba202513f1578311e))
+* **mcp:** add typescript check to code execution tool ([9e5bc79](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/9e5bc79e162e5ff1ddb5889ffd9f42957176063e))
+* **mcp:** handle code mode calls in the Stainless API ([5241597](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/5241597060fa6979947cec4940fb6a7fa5e80595))
+* **mcp:** return logs on code tool errors ([0886029](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/08860291a2a5bd367842a85ccadcfa06a67b3ef8))
+
+
+### Bug Fixes
+
+* **mcp:** add client instantiation options to code tool ([f105681](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/f105681535ede26dd5b28113279abea7dedd905d))
+* **mcp:** correct code tool API endpoint ([97f150b](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/97f150b577a4273c160fed0337d85470070d1bbe))
+* **mcp:** return correct lines on typescript errors ([2746f51](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/2746f512c8715d10f4097843bab70e736a591359))
+* **mcp:** return tool execution error on api error ([d3815ef](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/d3815ef1bb929634ffd2afe4dbd5753e4c01e785))
+* **mcp:** return tool execution error on jq failure ([1be0c9d](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/1be0c9d901bfce91807773150c3c130290a74724))
+
+
+### Chores
+
+* **client:** fix logger property type ([1c9209b](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/1c9209be975da0a9b6d548e58dcc6d4886b4546a))
+* **internal:** codegen related update ([de5e6d7](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/de5e6d719c6880a099d0c2ac63a64f7e8fbce253))
+* **internal:** codegen related update ([e678a82](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e678a82a9b196c88ded91cac4c5a7053cbc3f484))
+* **internal:** upgrade eslint ([ac143a5](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/ac143a50c55923dd4533a978a5d2d56effc51812))
+* **mcp:** update lockfile ([0292e87](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0292e874ded177afd70316411c956e09b672d87d))
+* **mcp:** upgrade jq-web ([3e47dbf](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/3e47dbfaae4fd02cee1c707ebbc231a17152f3b0))
+* use latest @modelcontextprotocol/sdk ([3b75544](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/3b755446e80869170b3a649c09eacc6cd4f8ebde))
+
 ## 1.3.0 (2025-11-11)
 
 Full Changelog: [v1.2.1...v1.3.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.2.1...v1.3.0)
