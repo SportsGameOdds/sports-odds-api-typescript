@@ -35,7 +35,10 @@ export async function codeTool() {
       headers: {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
-        client_envs: JSON.stringify({ SPORTS_ODDS_API_KEY_HEADER: readEnv('SPORTS_ODDS_API_KEY_HEADER') }),
+        client_envs: JSON.stringify({
+          SPORTS_ODDS_API_KEY_HEADER: readEnv('SPORTS_ODDS_API_KEY_HEADER'),
+          SPORTS_GAME_ODDS_BASE_URL: readEnv('SPORTS_GAME_ODDS_BASE_URL'),
+        }),
       },
       body: JSON.stringify({
         project_name: 'sports-odds-api',
