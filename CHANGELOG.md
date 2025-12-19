@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.0.0 (2025-12-19)
+
+Full Changelog: [v1.4.0...v2.0.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.4.0...v2.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **mcp:** remove deprecated tool schemes
+* **mcp:** **Migration:** To migrate, simply modify the command used to invoke the MCP server. Currently, the only supported tool scheme is code mode. Now, starting the server with just `node /path/to/mcp/server` or `npx package-name` will invoke code tools: changing your command to one of these is likely all you will need to do.
+
+### Bug Fixes
+
+* **mcp:** pass base url to code tool ([267e8a8](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/267e8a8d61f5e7cd3434a5d5f6e96ac2f91ffe74))
+
+
+### Chores
+
+* **mcp:** remove deprecated tool schemes ([2601a2e](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/2601a2e4d2fd2ac35c73aef343398116683f8179))
+
 ## 1.4.0 (2025-12-11)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.3.0...v1.4.0)
