@@ -56,7 +56,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add --transport stdio sports_odds_api_api --env SPORTS_ODDS_API_KEY_HEADER="Your SPORTS_ODDS_API_KEY_HEADER here." SPORTS_ODDS_API_KEY_HEADER="Your SPORTS_ODDS_API_KEY_HEADER here." -- npx -y sports-odds-api-mcp
+claude mcp add sports_odds_api_mcp_api --env SPORTS_ODDS_API_KEY_HEADER="Your SPORTS_ODDS_API_KEY_HEADER here." SPORTS_ODDS_API_KEY_HEADER="Your SPORTS_ODDS_API_KEY_HEADER here." -- npx -y sports-odds-api-mcp
 ```
 
 ## Code Mode
