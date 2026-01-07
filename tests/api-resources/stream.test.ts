@@ -23,7 +23,11 @@ describe('resource stream', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.stream.events(
-        { eventID: 'eventID', feed: 'feed', leagueID: 'leagueID' },
+        {
+          eventID: 'eventID',
+          feed: 'feed',
+          leagueID: 'leagueID',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(SportsGameOdds.NotFoundError);

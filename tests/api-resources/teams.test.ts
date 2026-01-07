@@ -23,7 +23,13 @@ describe('resource teams', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.teams.get(
-        { cursor: 'cursor', leagueID: 'leagueID', limit: 0, sportID: 'sportID', teamID: 'teamID' },
+        {
+          cursor: 'cursor',
+          leagueID: 'leagueID',
+          limit: 0,
+          sportID: 'sportID',
+          teamID: 'teamID',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(SportsGameOdds.NotFoundError);
