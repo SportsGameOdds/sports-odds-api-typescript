@@ -4,6 +4,7 @@ import { McpTool, Metadata, ToolCallResult, asErrorResult, asTextContentResult }
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { readEnv } from './server';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
+import { SportsGameOdds } from 'sports-odds-api';
 
 const prompt = `Runs JavaScript code to interact with the Sports Game Odds API.
 
@@ -55,7 +56,7 @@ export function codeTool(): McpTool {
       required: ['code'],
     },
   };
-  const handler = async (_: unknown, args: any): Promise<ToolCallResult> => {
+  const handler = async (client: SportsGameOdds, args: any): Promise<ToolCallResult> => {
     const code = args.code as string;
     const intent = args.intent as string | undefined;
 
@@ -71,8 +72,9 @@ export function codeTool(): McpTool {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
         client_envs: JSON.stringify({
-          SPORTS_ODDS_API_KEY_HEADER: readEnv('SPORTS_ODDS_API_KEY_HEADER'),
-          SPORTS_GAME_ODDS_BASE_URL: readEnv('SPORTS_GAME_ODDS_BASE_URL'),
+          SPORTS_ODDS_API_KEY_HEADER:
+            readEnv('SPORTS_ODDS_API_KEY_HEADER') ?? client.apiKeyHeader ?? undefined,
+          SPORTS_GAME_ODDS_BASE_URL: readEnv('SPORTS_GAME_ODDS_BASE_URL') ?? client.baseURL ?? undefined,
         }),
       },
       body: JSON.stringify({
