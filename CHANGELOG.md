@@ -1,5 +1,66 @@
 # Changelog
 
+## 2.0.0 (2026-02-14)
+
+Full Changelog: [v1.4.0...v2.0.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.4.0...v2.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **mcp:** remove deprecated tool schemes
+* **mcp:** **Migration:** To migrate, simply modify the command used to invoke the MCP server. Currently, the only supported tool scheme is code mode. Now, starting the server with just `node /path/to/mcp/server` or `npx package-name` will invoke code tools: changing your command to one of these is likely all you will need to do.
+
+### Features
+
+* **mcp:** add initial server instructions ([93f21cc](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/93f21cc46cb40703dd2cfb6b1b122a3ee5e3c11c))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([262b320](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/262b320c66ba46e642f1ab23171dcce59af07ddf))
+* **client:** avoid removing abort listener too early ([f22fffc](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/f22fffc2e4397070a9a7995810ebb0d84d6eefc2))
+* **docs:** fix mcp installation instructions for remote servers ([0bf8190](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0bf81909eed8e2d7517826eea3eb77eb7a943731))
+* **mcp:** allow falling back for required env variables ([ecbf522](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/ecbf5223f59920116848bce5c67f2491f6007bbd))
+* **mcp:** correct code tool api output types ([4a8cc28](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/4a8cc28c7c9c582974fdb947cade96d606b62217))
+* **mcp:** fix options parsing ([241a9cf](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/241a9cf405f4ef3f74bac0805d38f894a95341f7))
+* **mcp:** pass base url to code tool ([267e8a8](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/267e8a8d61f5e7cd3434a5d5f6e96ac2f91ffe74))
+* **mcp:** update code tool prompt ([1f8e375](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/1f8e375603022256eb5b09f58f9c2a055ae51507))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([aa14f33](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/aa14f33f8e3e1e9bde2171e5af38792496ab5f72))
+* **ci:** upgrade `actions/github-script` ([492a1ee](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/492a1ee4986928d26f42740ebe2395d28e3e37e4))
+* **client:** do not parse responses with empty content-length ([00908d5](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/00908d5726707df808788bbc8fef7515ceac56c1))
+* **client:** restructure abort controller binding ([f3f7b5b](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/f3f7b5bf14f004ba20ea603af1902ac3122843b0))
+* **internal:** add health check to MCP server when running in HTTP mode ([0ce18bd](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0ce18bd657820706e36e440324a83f9f7947ab54))
+* **internal:** allow basic filtering of methods allowed for MCP code mode ([b985714](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/b985714b7f817e369cab56bd9a5ce47df5a7064b))
+* **internal:** always generate MCP server dockerfiles and upgrade associated dependencies ([fbe695c](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/fbe695ccb35ff2fcaf94009b585541f9f40588d6))
+* **internal:** avoid type checking errors with ts-reset ([53fce92](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/53fce92115d778d4b67d614588d85c46fee04767))
+* **internal:** codegen related update ([d9cc424](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/d9cc4245143aba47c4573444d3d915658c3c9097))
+* **internal:** codegen related update ([ea3cc8a](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/ea3cc8adc6d4825505a692251d89550e87f110af))
+* **internal:** codegen related update ([808cb96](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/808cb9601d122a926210f9fd980c0a2a141afd73))
+* **internal:** codegen related update ([ed6515f](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/ed6515f084d4189b571567b2f3234b2a781a3a0f))
+* **internal:** codegen related update ([75199c9](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/75199c9c0079d52d2dbf3b2804d5c45efec29b3e))
+* **internal:** codegen related update ([7428b89](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/7428b89f22fc13ef30f2bb6a868e7deaff5940fc))
+* **internal:** fix pagination internals not accepting option promises ([0ecde6e](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/0ecde6eccda8d43d1255da981baa29638cfcfa19))
+* **internal:** improve layout of generated MCP server files ([0761324](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/07613240ef306e2180abd34ac9c5fce9fbe47a3e))
+* **internal:** refactor flag parsing for MCP servers and add debug flag ([6d27223](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/6d27223e05d6d2c8bfd94bcc8eac500c808a28e1))
+* **internal:** support oauth authorization code flow for MCP servers ([cbff324](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/cbff324e707fdd49c4f8d2d4b338c493622d6433))
+* **internal:** update `actions/checkout` version ([38272f2](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/38272f24d2ee3a2798b6db97b9cdcb7d20627959))
+* **internal:** update lock file ([b224746](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/b2247465566155b0854698904774403e3335d1d0))
+* **internal:** upgrade babel, qs, js-yaml ([10aeab8](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/10aeab84a9f1e776da0e144eb12b07314172eeb9))
+* **mcp:** add intent param to execute tool ([9d5e813](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/9d5e8132bcf88209f59b04abe7b3dc74e6e66593))
+* **mcp:** forward STAINLESS_API_KEY to docs search endpoint ([038c32e](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/038c32e07742a7a03cfdbe4c65458fd9a404b6b6))
+* **mcp:** pass intent param to execute handler ([ece66a2](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/ece66a2391c037418b7713a5618fedac3bab820c))
+* **mcp:** remove deprecated tool schemes ([2601a2e](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/2601a2e4d2fd2ac35c73aef343398116683f8179))
+* **mcp:** up tsconfig lib version to es2022 ([c210772](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/c2107729370acab0f9090d5a8fb78cc95d5173ab))
+* **mcp:** upgrade dependencies ([6ba26e6](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/6ba26e66304df9054ff30afa28378e86cc5e4be8))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([b6fc9a9](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/b6fc9a92c8fa50bac813793749e8bf2a94e7afcc))
+
 ## 1.4.0 (2025-12-11)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.3.0...v1.4.0)
