@@ -1,6 +1,6 @@
 {
   "name": "sports-odds-api",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "The official TypeScript library for the Sports Game Odds API",
   "author": "Sports Game Odds <api@sportsgameodds.com>",
   "types": "dist/index.d.ts",
