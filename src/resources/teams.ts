@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { NextCursorPage, type NextCursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get Team-related data
+ */
 export class Teams extends APIResource {
   /**
    * Get a list of Teams by ID or league

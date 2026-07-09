@@ -5,6 +5,9 @@ import * as EventsAPI from './events';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get info about Events (includes odds, results, teams, and other metadata)
+ */
 export class Stream extends APIResource {
   /**
    * Setup streamed (WebSocket) connection

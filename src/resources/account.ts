@@ -5,6 +5,9 @@ import * as AccountAPI from './account';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get data related to your Account & API key
+ */
 export class Account extends APIResource {
   /**
    * Get rate-limits and usage data about your API key
