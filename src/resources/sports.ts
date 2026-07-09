@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get Sport-related data
+ */
 export class Sports extends APIResource {
   /**
    * Get a list of sports

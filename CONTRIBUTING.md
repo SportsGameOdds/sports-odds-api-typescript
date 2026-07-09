@@ -60,15 +60,15 @@ $ yarn link sports-odds-api
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global sports-odds-api
+$ pnpm link --global sports-odds-api
 ```
 
 ## Running tests
 
-Most tests require you to [set up a mock server](https://github.com/stoplightio/prism) against the OpenAPI spec to run the tests.
+Most tests require you to [set up a mock server](https://github.com/dgellow/steady) against the OpenAPI spec to run the tests.
 
 ```sh
-$ npx prism mock path/to/your/openapi.yml
+$ ./scripts/mock
 ```
 
 ```sh

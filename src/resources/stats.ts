@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get data on specific Stats
+ */
 export class Stats extends APIResource {
   /**
    * Get a list of StatIDs
