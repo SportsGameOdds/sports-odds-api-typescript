@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { NextCursorPage, type NextCursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get info about Events (includes odds, results, teams, and other metadata)
+ */
 export class Events extends APIResource {
   /**
    * Get a list of Events

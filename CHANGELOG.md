@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.1 (2026-07-11)
+
+Full Changelog: [v2.0.0...v2.0.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v2.0.0...v2.0.1)
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([e655ed7](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/e655ed7d99e7d2669f25b4486219d354b5fb4b0f))
+
+
+### Chores
+
+* **internal:** codegen related update ([03bca00](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/03bca0033faa956d77469ab5d2ff5efeec8cd40a))
+
 ## 2.0.0 (2026-02-14)
 
 Full Changelog: [v1.4.0...v2.0.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v1.4.0...v2.0.0)

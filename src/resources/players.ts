@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { NextCursorPage, type NextCursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Get Player-related data
+ */
 export class Players extends APIResource {
   /**
    * Get a list of Players for a specific Team or Event

@@ -35,10 +35,16 @@ COPY . .
 
 # Install all dependencies and build everything
 RUN yarn install --frozen-lockfile && \
-    yarn build
+    yarn build && \
+    # Remove the symlink to the SDK so it doesn't interfere with the explicit COPY below
+    rm -Rf packages/mcp-server/node_modules/sports-odds-api
 
-# Production stage
-FROM node:24-alpine
+FROM denoland/deno:alpine-2.7.1
+
+# Install node and npm
+RUN apk add --no-cache nodejs npm
+
+ENV LD_LIBRARY_PATH=/usr/lib:/usr/local/lib
 
 # Add non-root user
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
@@ -57,6 +63,7 @@ COPY --from=builder /build/dist ./node_modules/sports-odds-api
 
 # Change ownership to nodejs user
 RUN chown -R nodejs:nodejs /app
+RUN chown -R nodejs:nodejs /deno-dir
 
 # Switch to non-root user
 USER nodejs
