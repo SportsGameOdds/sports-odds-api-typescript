@@ -22,6 +22,8 @@ export class Teams extends APIResource {
 export type TeamsNextCursorPage = NextCursorPage<Team>;
 
 export interface Team {
+  coach?: Team.Coach;
+
   colors?: Team.Colors;
 
   leagueID?: string;
@@ -32,14 +34,22 @@ export interface Team {
 
   names?: Team.Names;
 
+  owner?: Team.Owner;
+
   sportID?: string;
 
   standings?: Team.Standings;
 
   teamID?: string;
+
+  venue?: Team.Venue;
 }
 
 export namespace Team {
+  export interface Coach {
+    name?: string;
+  }
+
   export interface Colors {
     primary?: string;
 
@@ -62,7 +72,13 @@ export namespace Team {
     short?: string;
   }
 
+  export interface Owner {
+    name?: string;
+  }
+
   export interface Standings {
+    last5?: string;
+
     losses?: number;
 
     played?: number;
@@ -71,9 +87,29 @@ export namespace Team {
 
     record?: string;
 
+    streak?: number;
+
     ties?: number;
 
     wins?: number;
+  }
+
+  export interface Venue {
+    address?: string;
+
+    capacity?: number;
+
+    city?: string;
+
+    countryCode?: string;
+
+    countryName?: string;
+
+    name?: string;
+
+    regionCode?: string;
+
+    regionName?: string;
   }
 }
 

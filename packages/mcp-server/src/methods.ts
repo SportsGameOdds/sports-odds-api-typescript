@@ -17,6 +17,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/events/',
   },
   {
+    clientCallName: 'client.markets.get',
+    fullyQualifiedName: 'markets.get',
+    httpMethod: 'get',
+    httpPath: '/markets/',
+  },
+  {
     clientCallName: 'client.teams.get',
     fullyQualifiedName: 'teams.get',
     httpMethod: 'get',

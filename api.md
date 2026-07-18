@@ -8,6 +8,16 @@ Methods:
 
 - <code title="get /events/">client.events.<a href="./src/resources/events.ts">get</a>({ ...params }) -> EventsNextCursorPage</code>
 
+# Markets
+
+Types:
+
+- <code><a href="./src/resources/markets.ts">Market</a></code>
+
+Methods:
+
+- <code title="get /markets/">client.markets.<a href="./src/resources/markets.ts">get</a>({ ...params }) -> MarketsNextCursorPage</code>
+
 # Teams
 
 Types:
