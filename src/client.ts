@@ -22,6 +22,7 @@ import { APIPromise } from './core/api-promise';
 import { Account, AccountUsage, RateLimitInterval } from './resources/account';
 import { Event, EventGetParams, Events, EventsNextCursorPage } from './resources/events';
 import { League, LeagueGetParams, LeagueGetResponse, Leagues } from './resources/leagues';
+import { Market, MarketGetParams, Markets, MarketsNextCursorPage } from './resources/markets';
 import { Player, PlayerGetParams, Players, PlayersNextCursorPage } from './resources/players';
 import { Sport, SportGetResponse, Sports } from './resources/sports';
 import { Stat, StatGetParams, StatGetResponse, Stats } from './resources/stats';
@@ -787,6 +788,10 @@ export class SportsGameOdds {
    */
   events: API.Events = new API.Events(this);
   /**
+   * Get metadata on supported Markets
+   */
+  markets: API.Markets = new API.Markets(this);
+  /**
    * Get Team-related data
    */
   teams: API.Teams = new API.Teams(this);
@@ -817,6 +822,7 @@ export class SportsGameOdds {
 }
 
 SportsGameOdds.Events = Events;
+SportsGameOdds.Markets = Markets;
 SportsGameOdds.Teams = Teams;
 SportsGameOdds.Players = Players;
 SportsGameOdds.Leagues = Leagues;
@@ -839,6 +845,13 @@ export declare namespace SportsGameOdds {
     type Event as Event,
     type EventsNextCursorPage as EventsNextCursorPage,
     type EventGetParams as EventGetParams,
+  };
+
+  export {
+    Markets as Markets,
+    type Market as Market,
+    type MarketsNextCursorPage as MarketsNextCursorPage,
+    type MarketGetParams as MarketGetParams,
   };
 
   export {

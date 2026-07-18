@@ -7,9 +7,9 @@ const client = new SportsGameOdds({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource events', () => {
+describe('resource markets', () => {
   test('get', async () => {
-    const responsePromise = client.events.get();
+    const responsePromise = client.markets.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,32 +22,24 @@ describe('resource events', () => {
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.events.get(
+      client.markets.get(
         {
+          betTypeID: 'betTypeID',
           bookmakerID: 'bookmakerID',
-          cancelled: true,
           cursor: 'cursor',
-          ended: true,
-          eventID: 'eventID',
-          eventIDs: 'eventIDs',
-          expandResults: true,
-          finalized: true,
-          includeAltLines: true,
-          includeOpenCloseOdds: true,
-          includeOpposingOdds: true,
+          isMainMarket: true,
+          isProp: true,
+          isSubPeriod: true,
+          isSupported: true,
           leagueID: 'leagueID',
           limit: 0,
-          live: true,
           oddID: 'oddID',
-          oddsAvailable: true,
-          oddsPresent: true,
-          playerID: 'playerID',
+          periodID: 'periodID',
+          propType: 'propType',
+          sideID: 'sideID',
           sportID: 'sportID',
-          started: true,
-          startsAfter: '2019-12-27T18:11:19.117Z',
-          startsBefore: '2019-12-27T18:11:19.117Z',
-          teamID: 'teamID',
-          type: 'type',
+          statEntityID: 'statEntityID',
+          statID: 'statID',
         },
         { path: '/_stainless_unknown_path' },
       ),

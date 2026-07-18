@@ -109,6 +109,7 @@ function getTSDiagnostics(code: string): string[] {
 const fuse = new Fuse(
   [
     'client.events.get',
+    'client.markets.get',
     'client.teams.get',
     'client.players.get',
     'client.leagues.get',

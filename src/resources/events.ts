@@ -36,6 +36,9 @@ export interface Event {
 
   players?: { [key: string]: Event.Players };
 
+  /**
+   * Nested results in the format `{periodID}.{statEntityID}.{statID} → number`.
+   */
   results?: { [key: string]: { [key: string]: { [key: string]: number } } };
 
   sportID?: string;
@@ -55,7 +58,45 @@ export namespace Event {
   }
 
   export interface Info {
+    broadcasts?: Array<Info.Broadcast>;
+
+    referee?: Info.Referee;
+
     seasonWeek?: string;
+
+    venue?: Info.Venue;
+  }
+
+  export namespace Info {
+    export interface Broadcast {
+      broadcasterID?: string;
+
+      name?: string;
+
+      type?: 'tv' | 'webstream' | 'subscription' | 'sportsbook';
+    }
+
+    export interface Referee {
+      name?: string;
+    }
+
+    export interface Venue {
+      address?: string;
+
+      capacity?: number;
+
+      city?: string;
+
+      countryCode?: string;
+
+      countryName?: string;
+
+      name?: string;
+
+      regionCode?: string;
+
+      regionName?: string;
+    }
   }
 
   export interface Odds {
@@ -112,11 +153,23 @@ export namespace Event {
 
       bookmakerID?: string;
 
+      closeOdds?: string;
+
+      closeOverUnder?: string;
+
+      closeSpread?: string;
+
       isMainLine?: boolean;
 
       lastUpdatedAt?: string;
 
       odds?: string;
+
+      openOdds?: string;
+
+      openOverUnder?: string;
+
+      openSpread?: string;
 
       overUnder?: string;
 
@@ -136,6 +189,10 @@ export namespace Event {
     photo?: string;
 
     playerID?: string;
+
+    status?: 'ir' | 'active' | 'out' | 'suspended' | 'questionable' | 'doubtful' | 'probable';
+
+    statusDetails?: string;
 
     teamID?: string;
   }
@@ -290,6 +347,12 @@ export interface EventGetParams extends NextCursorPageParams {
   eventIDs?: string;
 
   /**
+   * Whether to expand the results object to include all stat values rather than just
+   * the base set
+   */
+  expandResults?: boolean;
+
+  /**
    * Only include finalized Events (true), exclude unfinalized Events (false) or all
    * Events (omit)
    */
@@ -299,6 +362,12 @@ export interface EventGetParams extends NextCursorPageParams {
    * Whether to include alternate lines in the odds byBookmaker data
    */
   includeAltLines?: boolean;
+
+  /**
+   * Whether to include open and close odds values (openOdds, closeOdds, openSpread,
+   * closeSpread, openOverUnder, closeOverUnder) in the odds byBookmaker data
+   */
+  includeOpenCloseOdds?: boolean;
 
   /**
    * Whether to include opposing odds for each included oddID
