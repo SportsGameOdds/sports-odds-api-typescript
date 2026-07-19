@@ -28,7 +28,7 @@ export const newMcpServer = async ({
   new McpServer(
     {
       name: 'sports_odds_api_api',
-      version: '2.1.0',
+      version: '2.2.0',
     },
     {
       instructions: await getInstructions({ stainlessApiKey, customInstructionsPath }),

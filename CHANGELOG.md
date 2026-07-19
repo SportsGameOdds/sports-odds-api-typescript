@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0 (2026-07-19)
+
+Full Changelog: [v2.1.0...v2.2.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v2.1.0...v2.2.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([33c18ef](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/33c18ef1ba78c8ae9ba3f08970c5702dd03c2799))
+
 ## [2.1.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v2.0.1...v2.1.0) (2026-07-19)
 
 
