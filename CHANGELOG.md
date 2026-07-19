@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.0](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v2.0.1...v2.1.0) (2026-07-19)
+
+
+### Features
+
+* add support for the /markets endpoint ([bc6c1e0](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/bc6c1e0541433989ec068a7c1e01e751ab461f7a))
+* initial stlc build ([c41f369](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/c41f369764d25bf27e563c01a03e77003c4d7f33))
+
+
+### Chores
+
+* format package.json with prettier ([f0cd4d2](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/f0cd4d2469e98e2034b6aae1dc2cc9b01135b396))
+* format README with prettier ([5bd269b](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/5bd269ba4076c099c27decc9c19fb71c42aa1a8e))
+* format release-doctor workflow ([7e6b9c3](https://github.com/SportsGameOdds/sports-odds-api-typescript/commit/7e6b9c3a445a7374ec99fb0c00cf0e4444db8ddd))
+
 ## 2.0.1 (2026-07-11)
 
 Full Changelog: [v2.0.0...v2.0.1](https://github.com/SportsGameOdds/sports-odds-api-typescript/compare/v2.0.0...v2.0.1)
