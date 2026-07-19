@@ -70,15 +70,15 @@ Our Streaming API provides real-time updates for Event objects through WebSocket
 
 We use [Pusher Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/) for WebSocket communication. While you can connect using any WebSocket library, we strongly recommend using any [Pusher Client Library](https://pusher.com/docs/channels/library_auth_reference/pusher-client-libraries) (ex: [Javascript](https://github.com/pusher/pusher-js), [Python](https://github.com/pusher/pusher-http-python))
 
-
 ## How It Works
 
 The streaming process involves two steps:
 
 1. **Get Connection Details**: Make a request using `client.stream.events()` to receive:
-    - WebSocket authentication credentials
-    - WebSocket URL/channel info
-    - Initial snapshot of current data
+
+   - WebSocket authentication credentials
+   - WebSocket URL/channel info
+   - Initial snapshot of current data
 
 2. **Connect and Stream**: Use the provided details to connect via Pusher (or another WebSocket library) and receive real-time `eventID` notifications for changed events
 
@@ -88,11 +88,11 @@ Your API key will have limits on concurrent streams.
 
 Subscribe to different feeds using the `feed` query parameter:
 
-| Feed              | Description                                                                 | Required Parameters |
-| ----------------- | --------------------------------------------------------------------------- | ------------------- |
-| `events:live`     | All events currently in progress (started but not finished)                | None                |
-| `events:upcoming` | Upcoming events with available odds for a specific league                  | `leagueID`          |
-| `events:byid`     | Updates for a single specific event                                         | `eventID`           |
+| Feed              | Description                                                 | Required Parameters |
+| ----------------- | ----------------------------------------------------------- | ------------------- |
+| `events:live`     | All events currently in progress (started but not finished) | None                |
+| `events:upcoming` | Upcoming events with available odds for a specific league   | `leagueID`          |
+| `events:byid`     | Updates for a single specific event                         | `eventID`           |
 
 The number of supported feeds will increase over time. Please reach out if you have a use case which can't be covered by these feeds.
 
@@ -101,13 +101,12 @@ The number of supported feeds will increase over time. Please reach out if you h
 Here's the minimal code to connect to live events:
 
 ```js [JavaScript/Node.js]
-const axios = require("axios");
-const Pusher = require("pusher-js");
-const SportsGameOdds = require("sports-odds-api");
+const axios = require('axios');
+const Pusher = require('pusher-js');
+const SportsGameOdds = require('sports-odds-api');
 
-
-const STREAM_FEED = "events:live"; // ex: events:upcoming, events:byid, events:live
-const API_KEY = "YOUR API KEY";
+const STREAM_FEED = 'events:live'; // ex: events:upcoming, events:byid, events:live
+const API_KEY = 'YOUR API KEY';
 const client = new SportsGameOdds({ apiKeyHeader: API_KEY });
 
 const run = async () => {
@@ -115,26 +114,26 @@ const run = async () => {
   const EVENTS = new Map();
 
   // Call this endpoint to get initial data and connection parameters
-  const streamInfo = await client.stream.events({ feed: STREAM_FEED })
+  const streamInfo = await client.stream.events({ feed: STREAM_FEED });
 
   // Seed initial data
   streamInfo.data.forEach((event) => EVENTS.set(event?.eventID, event));
 
   // Connect to WebSocket server
   const pusher = new Pusher(streamInfo.pusherKey, streamInfo.pusherOptions);
-  pusher.subscribe(streamInfo.channel).bind("data", async (changedEvents) => {
+  pusher.subscribe(streamInfo.channel).bind('data', async (changedEvents) => {
     // Get the eventIDs that changed
-    const eventIDs = changedEvents.map(({ eventID }) => eventID).join(",");
+    const eventIDs = changedEvents.map(({ eventID }) => eventID).join(',');
 
     // Get the full event data for the changed events
-     for await (const event of client.events.getEvents({ eventIDs })) {
-        // Update our data with the full event data
-        EVENTS.set(event?.eventID, event);
-     }
+    for await (const event of client.events.getEvents({ eventIDs })) {
+      // Update our data with the full event data
+      EVENTS.set(event?.eventID, event);
+    }
   });
 
   // Use pusher.disconnect to disconnect from the WebSocket server
-  process.on("SIGINT", pusher.disconnect);
+  process.on('SIGINT', pusher.disconnect);
 };
 run();
 ```
