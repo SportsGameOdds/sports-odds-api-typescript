@@ -64,7 +64,8 @@ export namespace StreamEventsResponse {
 
 export interface StreamEventsParams {
   /**
-   * An eventID to stream events for
+   * An eventID to stream events for. If the eventID has since changed, the Event
+   * which lists it in its aliases is streamed
    */
   eventID?: string;
 

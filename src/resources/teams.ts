@@ -22,6 +22,8 @@ export class Teams extends APIResource {
 export type TeamsNextCursorPage = NextCursorPage<Team>;
 
 export interface Team {
+  aliases?: Array<string>;
+
   coach?: Team.Coach;
 
   colors?: Team.Colors;
@@ -125,7 +127,8 @@ export interface TeamGetParams extends NextCursorPageParams {
   sportID?: string;
 
   /**
-   * A single teamID or comma-separated list of teamIDs to get data for
+   * A single teamID or comma-separated list of teamIDs to get data for. If a teamID
+   * has since changed, the Team which lists it in its aliases is returned
    */
   teamID?: string;
 }

@@ -72,7 +72,8 @@ export interface PlayerGetParams extends NextCursorPageParams {
   eventID?: string;
 
   /**
-   * PlayerID to get data for
+   * PlayerID to get data for. If a playerID has since changed, the Player which
+   * lists it in its aliases is returned
    */
   playerID?: string;
 
