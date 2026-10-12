@@ -24,6 +24,8 @@ export type EventsNextCursorPage = NextCursorPage<Event>;
 export interface Event {
   activity?: Event.Activity;
 
+  aliases?: Array<string>;
+
   eventID?: string;
 
   info?: Event.Info;
@@ -337,12 +339,14 @@ export interface EventGetParams extends NextCursorPageParams {
   ended?: boolean;
 
   /**
-   * An eventID to get Event data for
+   * An eventID to get Event data for. If an eventID has since changed, the Event
+   * which lists it in its aliases is returned
    */
   eventID?: string;
 
   /**
-   * A comma separated list of eventIDs to get Event data for
+   * A comma separated list of eventIDs to get Event data for. If an eventID has
+   * since changed, the Event which lists it in its aliases is returned
    */
   eventIDs?: string;
 
