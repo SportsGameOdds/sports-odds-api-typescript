@@ -98,6 +98,8 @@ export namespace Event {
       regionCode?: string;
 
       regionName?: string;
+
+      venueID?: string;
     }
   }
 
