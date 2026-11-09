@@ -67,11 +67,21 @@ export namespace Team {
   }
 
   export interface Names {
+    firstName?: string;
+
+    lastName?: string;
+
+    location?: string;
+
     long?: string;
 
     medium?: string;
 
+    nickname?: string;
+
     short?: string;
+
+    suffix?: string;
   }
 
   export interface Owner {
@@ -112,6 +122,8 @@ export namespace Team {
     regionCode?: string;
 
     regionName?: string;
+
+    venueID?: string;
   }
 }
 

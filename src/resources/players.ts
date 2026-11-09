@@ -24,7 +24,7 @@ export type PlayersNextCursorPage = NextCursorPage<Player>;
 export interface Player {
   aliases?: Array<string>;
 
-  jerseyNumber?: number;
+  jerseyNumber?: string;
 
   leagueID?: string;
 
@@ -58,6 +58,10 @@ export namespace Player {
     firstName?: string;
 
     lastName?: string;
+
+    nickname?: string;
+
+    suffix?: string;
   }
 
   export interface PlayerTeams {
